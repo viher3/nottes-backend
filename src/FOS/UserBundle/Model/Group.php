@@ -1,6 +1,6 @@
 <?php
 
-namespace FOS\UserBundle\Model;
+namespace App\FOS\UserBundle\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 
