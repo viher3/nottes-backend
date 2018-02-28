@@ -1,6 +1,7 @@
 # config/doctrine/Notte.orm.yml
 App\Entity\Notte:
     type: entity
+    table: nottes
     id:
         id:
             type: integer
