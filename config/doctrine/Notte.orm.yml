@@ -1,0 +1,24 @@
+# config/doctrine/Notte.orm.yml
+App\Entity\Notte:
+    type: entity
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        name:
+            type: string
+            length: 255
+        content:
+            type: text
+        tags:
+            type: string
+            length: 255
+            nullable: true
+        isEncrypted:
+            type: boolean
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+        
