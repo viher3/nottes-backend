@@ -2,12 +2,8 @@ index:
     path: /
     controller: App\Controller\HomeController::index
 
-priv:
-    path: /api/priv
-
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-    controller: App\Controller\HomeController::privatee
 
 api_login_check:
    path: /api/login_check
