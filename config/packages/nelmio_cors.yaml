@@ -1,0 +1,16 @@
+nelmio_cors: 
+  defaults: 
+    allow_headers: 
+      - "*"
+    allow_methods: 
+      - GET
+      - POST
+      - PUT
+      - DELETE
+      - OPTIONS
+    allow_origin: 
+      - "*"
+    max_age: 3600
+    origin_regex: false
+  paths: 
+    ^/api: ~

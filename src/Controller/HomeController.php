@@ -11,4 +11,9 @@
 		{
 			return new JsonResponse("Nottes api!");
 		}
+
+		public function privatee()
+		{
+			return new JsonResponse("private api!");
+		}
 	}
