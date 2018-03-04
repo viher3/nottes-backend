@@ -1,6 +1,6 @@
 index:
     path: /
-    controller: App\Controller\HomeController::index
+    controller: App\Controller\Home\HomeController::index
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
