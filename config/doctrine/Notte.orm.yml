@@ -2,6 +2,15 @@
 App\Entity\Notte:
     type: entity
     table: nottes
+
+    manyToOne:
+
+        creatorUser:
+          targetEntity: App\Entity\User
+          joinColumn:
+            name: creator_user_id
+            referencedColumnName: id
+
     id:
         id:
             type: integer

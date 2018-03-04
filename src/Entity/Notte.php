@@ -63,5 +63,15 @@ class Notte
      */
     private $updatedAt;
 
+    /**
+     * @var \App\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="creator_user_id", referencedColumnName="id")
+     * })
+     */
+    private $creatorUser;
+
 
 }
