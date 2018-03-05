@@ -2,32 +2,22 @@
 
 	namespace App\Controller\Nottes;
 
-	use FOS\RestBundle\Controller\Annotations\Post;
-	use FOS\RestBundle\Controller\FOSRestController;
-	use FOS\RestBundle\Controller\Annotations\RequestParam;
-	use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-
-	use Swagger\Annotations as SWG;
-	use Nelmio\ApiDocBundle\Annotation\Model;
+	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	use Symfony\Component\Routing\Annotation\Route;
 
-	class CreateNotteController
+	use Nelmio\ApiDocBundle\Annotation\Model;
+	use Swagger\Annotations as SWG;
+
+	class CreateNotteController extends Controller
 	{
-		/*
-	     * List the rewards of the specified user.
+		/**
+	     * Create a new notte
 	     *
-	     * This call takes into account all confirmed awards, but not pending or refused awards.
+	     * @Route("/api/notte", name="nottes_get", methods={"POST"}).
 	     *
-	     * @Route("/api/nottes", methods={"GET"})
 	     * @SWG\Response(
 	     *     response=200,
-	     *     description="Returns the rewards of an user"
-	     * )
-	     * @SWG\Parameter(
-	     *     name="order",
-	     *     in="query",
-	     *     type="string",
-	     *     description="The field used to order rewards"
+	     *     description="Returns the created notte"
 	     * )
 	     * @SWG\Tag(name="nottes")
 	     */
