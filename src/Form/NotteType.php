@@ -15,7 +15,6 @@
 	            ->add('content')
 	            ->add('tags')
 	            ->add('isEncrypted')
-	            ->add('creatorUser')
 	        ;
 	    }
 	}

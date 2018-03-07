@@ -73,5 +73,163 @@ class Notte
      */
     private $creatorUser;
 
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * @param int $id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     *
+     * @return self
+     */
+    public function setContent($content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param string|null $tags
+     *
+     * @return self
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isIsEncrypted()
+    {
+        return $this->isEncrypted;
+    }
+
+    /**
+     * @param bool $isEncrypted
+     *
+     * @return self
+     */
+    public function setIsEncrypted($isEncrypted)
+    {
+        $this->isEncrypted = $isEncrypted;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     *
+     * @return self
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     *
+     * @return self
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return \App\Entity\User
+     */
+    public function getCreatorUser()
+    {
+        return $this->creatorUser;
+    }
+
+    /**
+     * @param \App\Entity\User $creatorUser
+     *
+     * @return self
+     */
+    public function setCreatorUser(\App\Entity\User $creatorUser)
+    {
+        $this->creatorUser = $creatorUser;
+
+        return $this;
+    }
 }
