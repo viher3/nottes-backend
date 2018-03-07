@@ -5,7 +5,9 @@ fos_rest:
   disable_csrf_role: IS_AUTHENTICATED_ANONYMOUSLY
   param_fetcher_listener: true
   body_listener: true
-  format_listener: true
+  format_listener: 
+    rules:
+      - { path: ^/, prefer_extension: true, fallback_format: json, priorities: [ json ] }
   view:
     view_response_listener: 'force'
     formats:
