@@ -35,7 +35,7 @@ security:
 
         # Custom authentication firewall for all request thats starts from /api
         api:
-            pattern:  ^/api
+            pattern:  ^/api(?!/doc$)
             stateless: true
             anonymous: false
             provider: fos_userbundle
