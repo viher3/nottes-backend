@@ -17,6 +17,9 @@ cache:
   directories:
     - $HOME/.composer/cache/files
 
+env:
+  - DATABASE_URL="mysql://travis@localhost:3306/nottes-app-test"
+
 # Update composer
 before-install:
   - composer self-update

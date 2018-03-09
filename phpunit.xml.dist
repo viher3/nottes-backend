@@ -20,7 +20,6 @@
         <env name="JWT_TOKEN_TTL" value="3600" />
         <env name="JWT_EXPIRATION_TIME" value="60" />
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
-        <env name="DATABASE_URL" value="mysql://travis@localhost:3306/nottes-app-test" />
         <!-- define your env variables for the test env here -->
     </php>
 
