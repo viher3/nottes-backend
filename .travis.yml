@@ -1,0 +1,48 @@
+# Project language
+language: php
+
+# language version
+php:
+    - 7.1
+
+# Allows use container-based infrastructure
+sudo: false
+
+# Start mysql service
+services:
+  - mysql
+
+# Cache composer packages so "composer install" is faster
+cache:
+  directories:
+    - $HOME/.composer/cache/files
+
+# Update composer
+before-install:
+  - composer self-update
+
+# Install composer dependencies,
+# Create database, schema and fixtures
+install:
+  - composer install
+  - composer require --dev satooshi/php-coveralls:^1.0
+  - cp .env.travis .env
+  - php bin/console doctrine:database:create --env=test
+  - php bin/console doctrine:schema:create --env=test
+  - php bin/console doctrine:fixtures:load -n --env=test
+
+# Run script
+script:
+  - mkdir -p build/logs
+  - ./vendor/bin/simple-phpunit --coverage-clover build/logs/clover.xml
+  #- phpunit --testsuite backend --coverage-clover build/logs/clover.xml
+
+after_success: |
+  if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then php vendor/bin/coveralls -v --config .coveralls.yml; fi;
+
+#after_success:
+#  - vendor/satooshi/php-coveralls/bin/coveralls build/logs/clover.xml
+
+# After a build, send email notification with the build results
+notifications:
+  email: info@albertolabs.com
