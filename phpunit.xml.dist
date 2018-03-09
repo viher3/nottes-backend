@@ -14,8 +14,8 @@
         <env name="APP_DEBUG" value="1" />
         <env name="APP_SECRET" value="s$cretf0rt3st" />
         <env name="SHELL_VERBOSITY" value="-1" />
-        <env name="JWT_PRIVATE_KEY_PATH" value="./var/jwt/private.pem" />
-        <env name="JWT_PUBLIC_KEY_PATH" value="./var/jwt/public.pem" />
+        <env name="JWT_PRIVATE_KEY_PATH" value="./var/jwt/private_test.pem" />
+        <env name="JWT_PUBLIC_KEY_PATH" value="./var/jwt/public_test.pem" />
         <env name="JWT_PASSPHRASE" value="181302" />
         <env name="JWT_TOKEN_TTL" value="3600" />
         <env name="JWT_EXPIRATION_TIME" value="60" />
