@@ -26,9 +26,6 @@ before-install:
 install:
   - composer install
   - composer require --dev satooshi/php-coveralls:^1.0
-  #- rm ./config/packages/test/doctrine.yaml
-  #- cp ./config/packages/test/doctrine.travis.yaml ./config/packages/test/doctrine.yaml
-  - cp .env.travis .env
   - php bin/console doctrine:database:create --env=test
   - php bin/console doctrine:schema:create --env=test
   - php bin/console doctrine:fixtures:load -n --env=test
