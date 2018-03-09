@@ -10,8 +10,8 @@
 	{
 	    public function testAdd()
 	    {
-	        $authToken 	= ( new AuthenticationHelper() ) ->getAuthToken();
-	        $client 	= static::createClient();
+	        $client	= static::createClient();
+	        $client	= ( new AuthenticationHelper() )->getAuthToken($client);
 
 	        $client->request(
 		      "POST",
@@ -21,10 +21,6 @@
 		        "content" => "phpunit-test",
 		        "tags" => "phpunit,test",
 		        "isEncrypted" => false
-		      ],
-		      [],
-		      [
-		        'HTTP_AUTHORIZATION' => $authToken
 		      ]
 		    );
 

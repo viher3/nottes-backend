@@ -4,24 +4,22 @@
 
 	class AuthenticationHelper
 	{
-	    public function getAuthToken()
+	    public function getAuthToken($client, $username="phpunit", $password=1234)
 	    {
-	    	$ch = curl_init();
+	    	$client->request(
+		        'POST',
+		        '/api/login_check',
+		        array(
+		            '_username' => $username,
+		            '_password' => $password,
+		        )
+		    );
 
-			curl_setopt($ch, CURLOPT_URL,"http://127.0.0.1:8000/api/login_check");
-			curl_setopt($ch, CURLOPT_POST, 1);
-			curl_setopt($ch, CURLOPT_POSTFIELDS, "_username=phpunit&_password=1234");
+		    $data = json_decode($client->getResponse()->getContent(), true);
 
+		    // add jwt to th eauth header
+		    $client->setServerParameter('HTTP_Authorization', sprintf('Bearer %s', $data['token']));
 
-			// receive server response ...
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-			$server_output = curl_exec ($ch);
-
-			curl_close($ch);
-
-			$result = json_decode($server_output, true);
-
-			return ( ! empty($result['token'])) ? "Bearer " . $result['token'] : "";
+		    return $client;
 	    }
 	}
