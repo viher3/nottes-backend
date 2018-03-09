@@ -3,6 +3,8 @@
 /build/
 /phpunit.xml
 /var/*
+!/var/jwt/public_test.pem
+!/var/jwt/private_test.pem
 !/var/cache
 /var/cache/*
 !var/cache/.gitkeep
@@ -15,8 +17,6 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
-!/var/jwt/public_test.pem
-!/var/jwt/private_test.pem
 
 ###> symfony/web-server-bundle ###
 .web-server-pid
