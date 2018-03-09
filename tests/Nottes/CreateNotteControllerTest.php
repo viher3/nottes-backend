@@ -30,6 +30,8 @@
 
 		    $arrTestResult = json_decode( $client->getResponse()->getContent(), true );
 
+		    var_dump($arrTestResult);
+
 		    $this->assertEquals(200, $client->getResponse()->getStatusCode());
 	    }
 	}

@@ -19,6 +19,7 @@
         <env name="JWT_PASSPHRASE" value="181302" />
         <env name="JWT_TOKEN_TTL" value="3600" />
         <env name="JWT_EXPIRATION_TIME" value="60" />
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
         <!-- define your env variables for the test env here -->
     </php>
 
