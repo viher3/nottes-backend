@@ -232,4 +232,18 @@ class Notte
 
         return $this;
     }
+
+    
+    public function setCreatedValue()
+    {
+        $currDatetime = new \DateTime();
+        $this->createdAt        = $currDatetime;
+        $this->lastUpdate       = $currDatetime;
+    }
+
+    public function setUpdatedValue()
+    {
+        $this->lastUpdate = new \DateTime();
+    }
+    
 }

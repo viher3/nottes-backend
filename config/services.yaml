@@ -29,3 +29,12 @@ services:
 
     sensio_framework_extra.view.listener:
         alias: Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener
+
+    # custom services
+    jwt.user.manager:
+        public: true
+        class: App\Services\User\JwtUserManager
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@security.token_storage'
+            - '@lexik_jwt_authentication.encoder'

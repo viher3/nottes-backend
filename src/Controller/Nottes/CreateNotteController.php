@@ -38,13 +38,34 @@
 
     		if( $form->isSubmitted() && $form->isValid() )
     		{
-    			$ret = ['IS_VALID'];
+    			$em	= $this->getDoctrine()->getManager();
+    			
+    			try
+    			{
+    				$notte->setCreatorUser( 
+    					$this->get('jwt.user.manager')->getUser()
+    				);
+
+    				$em->persist($notte);
+        			$em->flush($notte);
+
+        			return View::create($notte, Response::HTTP_OK , []);
+    			}
+    			catch(\Exception $e)
+    			{
+    				return View::create(
+    					[ 
+    						'ERROR' => 'SAVING_DATA', 
+    						'MESSAGES' => $e->getMessage() 
+    					], 
+    					Response::HTTP_INTERNAL_SERVER_ERROR , 
+    					[]
+    				);
+    			}
     		}
     		else
     		{
-    			$ret = ['IS_NOT_VALID'];
+    			return View::create($form->getErrors(), Response::HTTP_INTERNAL_SERVER_ERROR, []);
     		}
-
-    		return View::create($ret, Response::HTTP_OK , []);
 		}
 	}

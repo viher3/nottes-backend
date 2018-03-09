@@ -28,10 +28,9 @@
 		      ]
 		    );
 
-		    $arrTestResult = json_decode( $client->getResponse()->getContent(), true );
-
-		    var_dump($arrTestResult);
+		    $result = json_decode( $client->getResponse()->getContent(), true );
 
 		    $this->assertEquals(200, $client->getResponse()->getStatusCode());
+		    $this->assertNotEmpty($result['id']);
 	    }
 	}

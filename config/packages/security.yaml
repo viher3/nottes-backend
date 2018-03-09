@@ -33,6 +33,11 @@ security:
             stateless: true
             anonymous: true
 
+        refresh:
+            pattern:    ^/api/token/refresh
+            stateless:  true
+            anonymous:  true
+
         # Custom authentication firewall for all request thats starts from /api
         api:
             pattern:  ^/api(?!/doc$)

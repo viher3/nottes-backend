@@ -31,4 +31,8 @@ App\Entity\Notte:
             type: datetime
         updatedAt:
             type: datetime
-        
+            nullable: true
+
+    lifecycleCallbacks: 
+        prePersist: [ setCreatedValue ]
+        postUpdate: [ setUpdatedValue ]        
