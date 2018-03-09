@@ -5,6 +5,6 @@ nelmio_api_doc:
             title: Nottes
             description: Nottes backend
             version: 1.0.0
-    routes: # to filter documented routes
+    areas: # to filter documented routes
         path_patterns:
             - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
