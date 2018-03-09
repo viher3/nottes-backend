@@ -3,7 +3,7 @@ language: php
 
 # language version
 php:
-    - 7.1
+    - 7.2
 
 # Allows use container-based infrastructure
 sudo: false
