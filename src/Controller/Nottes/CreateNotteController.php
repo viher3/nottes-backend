@@ -17,11 +17,11 @@
 		/**
 	     * Create a new notte
 	     *
-	     * @Route("/api/notte", name="nottes_get", methods={"POST"}).
+	     * @Route("/api/notte", name="nottes_create", methods={"POST"}).
 	     *
 	     * @SWG\Response(
 	     *     response=200,
-	     *     description="Returns the created notte"
+	     *     description="Create a new notte"
 	     * )
 	     * @SWG\Tag(name="nottes")
 	     */
