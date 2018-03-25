@@ -2,8 +2,6 @@ import os
 
 print "Testing Nottes backend ..."
 
-appPath	= os.getcwd()
-
 # commands 
 testCmds = [
 	'php bin/console doctrine:schema:drop --force',
