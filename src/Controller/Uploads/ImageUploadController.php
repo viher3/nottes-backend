@@ -11,6 +11,7 @@
 	use Nelmio\ApiDocBundle\Annotation\Model;
 	use Swagger\Annotations as SWG;
 	use App\Entity\Notte;
+	use Aws\S3\S3Client;
 
 	class ImageUploadController extends Controller
 	{
@@ -25,12 +26,10 @@
 	     * )
 	     * @SWG\Tag(name="uploads")
 	     */
-		public function index(Request $request)
+		public function index(Request $request, S3Client $s3)
 		{
-			$droplet = $this->container->get('do.factory')->droplet();
-
-			var_dump($droplet);
-
-    		return View::create([], Response::HTTP_INTERNAL_SERVER_ERROR, []);
+			$spaces = $s3->listBuckets();
+			
+    		return View::create($spaces, Response::HTTP_OK, []);
 		}
 	}
