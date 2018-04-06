@@ -14,6 +14,7 @@
 	use Aws\S3\S3Client;
 	use Aws\S3\S3Exception;
 	use App\Services\Upload\FileSanitizer;
+	use App\Services\Upload\FileValidator;
 
 	class ImageUploadController extends Controller
 	{
@@ -30,14 +31,20 @@
 	     */
 		public function index(Request $request, S3Client $s3)
 		{
-			// TODO: validate image from server ...
-
 			// get file object
-			$file 	= $request->files->get("file");
+			$file = $request->files->get("file");
 
 			// get file attributes
 			$filename 		= $file->getClientOriginalName();
 			$newFilename 	= ( new FileSanitizer() )->sanitize($filename);
+
+			// validate file
+			$validator = new FileValidator();
+
+			if( ! $validator->validateImage($file) )
+			{
+				return View::create(["error" => $validator->getError() ], Response::HTTP_INTERNAL_SERVER_ERROR, []);
+			}
 
 			// create temp dir
 			$tempDir = $this->get("kernel")->getRootDir() . "/../public/temp/";
