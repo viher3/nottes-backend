@@ -33,6 +33,9 @@
 			$nottes = $em->getRepository(Notte::class)->findBy(
 				[
 					"creatorUser" => $user
+				],
+				[
+					"id" => "DESC"
 				]
 			);
 
