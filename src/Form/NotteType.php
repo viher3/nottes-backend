@@ -5,6 +5,7 @@
 	use Symfony\Component\Form\AbstractType;
 	use Symfony\Component\Form\FormBuilderInterface;
 	use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+	use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 	class NotteType extends AbstractType
 	{
@@ -15,6 +16,12 @@
 	            ->add('content')
 	            ->add('tags')
 	            ->add('isEncrypted')
+	            ->add('encryptionpwd', TextType::class, [
+					"mapped" => false	            	
+	            ])
+	            ->add('encryptionpwd2', TextType::class, [
+					"mapped" => false	            	
+	            ])
 	        ;
 	    }
 	}
