@@ -238,12 +238,12 @@ class Notte
     {
         $currDatetime = new \DateTime();
         $this->createdAt        = $currDatetime;
-        $this->lastUpdate       = $currDatetime;
+        $this->updatedAt       = $currDatetime;
     }
 
     public function setUpdatedValue()
     {
-        $this->lastUpdate = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
     
 }
