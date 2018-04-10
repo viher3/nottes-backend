@@ -21,7 +21,7 @@
 	     *
 	     * @SWG\Response(
 	     *     response=200,
-	     *     description="Returns the created notte"
+	     *     description="Return the notte entity object"
 	     * )
 	     * @SWG\Tag(name="nottes")
 	     */

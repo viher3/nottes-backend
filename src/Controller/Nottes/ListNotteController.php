@@ -21,7 +21,7 @@
 	     *
 	     * @SWG\Response(
 	     *     response=200,
-	     *     description="Returns all user nottes"
+	     *     description="Return all user notte entities"
 	     * )
 	     * @SWG\Tag(name="nottes")
 	     */

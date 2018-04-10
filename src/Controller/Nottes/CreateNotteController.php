@@ -19,9 +19,40 @@
 	     *
 	     * @Route("/api/notte", name="nottes_create", methods={"POST"}).
 	     *
+         * @SWG\Parameter(
+         *     name="name",
+         *     in="query",
+         *     type="string",
+         *     description="Document name or title"
+         * )
+         * @SWG\Parameter(
+         *     name="content",
+         *     in="query",
+         *     type="string",
+         *     description="Document content"
+         * )
+         * @SWG\Parameter(
+         *     name="tags",
+         *     in="query",
+         *     type="string",
+         *     description="Document tags separated by comma"
+         * )
+         * @SWG\Parameter(
+         *     name="isEncrypted",
+         *     in="query",
+         *     type="boolean",
+         *     description="If document is encrypted"
+         * )
+         * @SWG\Parameter(
+         *     name="encryptionPassword",
+         *     in="query",
+         *     type="string",
+         *     description="Encryption password"
+         * )
+         *
 	     * @SWG\Response(
 	     *     response=200,
-	     *     description="Create a new notte"
+	     *     description="Return the notte entity object"
 	     * )
 	     * @SWG\Tag(name="nottes")
 	     */
