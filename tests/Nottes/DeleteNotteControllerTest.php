@@ -6,21 +6,20 @@
 	use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 	use App\Tests\AuthenticationHelper;
 
-	class GetNotteControllerTest extends WebTestCase
+	class DeleteNotteControllerTest extends WebTestCase
 	{
-	    public function testAdd()
+	    public function testDelete()
 	    {
 	        $client	= static::createClient();
 	        $client	= ( new AuthenticationHelper() )->getAuthToken($client);
 
 	        $client->request(
-		      "GET",
-		      "/api/notte/2"
+		      "DELETE",
+		      "/api/notte/1"
 		    );
 
 		    $result = json_decode( $client->getResponse()->getContent(), true );
 
 		    $this->assertEquals(200, $client->getResponse()->getStatusCode());
-		    $this->assertNotEmpty($result['id']);
 	    }
 	}

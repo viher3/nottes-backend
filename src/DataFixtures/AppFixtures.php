@@ -47,6 +47,7 @@
       $notte->setContent("test-content");
       $notte->setTags("test-tags");
       $notte->setIsEncrypted(false);
+      $notte->setCreatorUser($user);
 
       $manager->persist($notte);
       $manager->flush();

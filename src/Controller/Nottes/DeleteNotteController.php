@@ -12,29 +12,42 @@
 	use Swagger\Annotations as SWG;
 	use App\Entity\Notte;
 
-	class GetNotteController extends Controller
+	class DeleteNotteController extends Controller
 	{
 		/**
-	     * Get a notte
+	     * Delete user notte
 	     *
-	     * @Route("/api/notte/{id}", name="nottes_get", methods={"GET"}).
+	     * @Route("/api/notte/{id}", name="nottes_delete", methods={"DELETE"}).
 	     *
 	     * @SWG\Response(
 	     *     response=200,
-	     *     description="Return the notte entity object"
+	     *     description="Delete user notte"
 	     * )
 	     * @SWG\Tag(name="nottes")
 	     */
-		public function index(Notte $notte)
+		public function index(Notte $id)
 		{
+			$em = $this->getDoctrine()->getManager();
+
 			// check creator user
 			$currentUser = $this->get('jwt.user.manager')->getUser();
-			
-			if( $currentUser != $notte->getCreatorUser() )
+
+			if( $currentUser != $id->getCreatorUser() )
 			{
 				return View::create("HTTP_UNAUTHORIZED", Response::HTTP_UNAUTHORIZED, []);
 			}
 
-			return View::create($notte, Response::HTTP_OK, []);
+			// remove
+			try
+			{
+				$em->remove($id);
+				$em->flush();
+			}
+			catch(\Exception $e)
+			{
+				return View::create($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR, []);
+			}
+
+			return View::create([], Response::HTTP_OK, []);
 		}
 	}
