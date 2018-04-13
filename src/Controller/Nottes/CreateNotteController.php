@@ -11,6 +11,7 @@
 	use Nelmio\ApiDocBundle\Annotation\Model;
 	use Swagger\Annotations as SWG;
 	use App\Entity\Notte;
+    use App\Services\Encryption\Encryption;
 
 	class CreateNotteController extends Controller
 	{
@@ -77,6 +78,19 @@
     					$this->get('jwt.user.manager')->getUser()
     				);
 
+                    // check if we need to encrypt the document
+                    if( $request->request->get("isEncrypted") )
+                    {
+                        $encryption = new Encryption();
+                        $encryptionResult = $encryption->encrypt(
+                                                $notte->getContent(), 
+                                                $request->request->get("encryptionpwd2")
+                                            );
+
+                        $notte->setContent($encryptionResult);
+                    }
+
+                    // save data
     				$em->persist($notte);
         			$em->flush($notte);
 
