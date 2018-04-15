@@ -48,6 +48,7 @@ class Notte
      * @ORM\Column(name="is_encrypted", type="boolean")
      */
     private $isEncrypted;
+    private $isDecrypted = false;
 
     /**
      * @var \DateTime
@@ -156,7 +157,7 @@ class Notte
     /**
      * @return bool
      */
-    public function isIsEncrypted()
+    public function isEncrypted()
     {
         return $this->isEncrypted;
     }
@@ -244,6 +245,11 @@ class Notte
     public function setUpdatedValue()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    public function isDecrypted($isDecrypted)
+    {
+        $this->isDecrypted = $isDecrypted;
     }
     
 }

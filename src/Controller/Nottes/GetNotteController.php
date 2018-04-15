@@ -11,6 +11,7 @@
 	use Nelmio\ApiDocBundle\Annotation\Model;
 	use Swagger\Annotations as SWG;
 	use App\Entity\Notte;
+	use App\Services\Encryption\Encryption;
 
 	class GetNotteController extends Controller
 	{
@@ -25,7 +26,7 @@
 	     * )
 	     * @SWG\Tag(name="nottes")
 	     */
-		public function index(Notte $notte)
+		public function index(Request $request, Notte $notte)
 		{
 			// check creator user
 			$currentUser = $this->get('jwt.user.manager')->getUser();
@@ -33,6 +34,32 @@
 			if( $currentUser != $notte->getCreatorUser() )
 			{
 				return View::create("HTTP_UNAUTHORIZED", Response::HTTP_UNAUTHORIZED, []);
+			}
+
+			if( $notte->isEncrypted() && $request->query->get("pwd") )
+			{
+				try
+				{
+					$encryption = new Encryption();
+					$decryptedContent = $encryption->decrypt(
+						$notte->getContent(),
+						base64_decode($request->query->get("pwd"))
+					);
+
+					$notte->setContent($decryptedContent);
+					$notte->isDecrypted(true);
+				}
+				catch(\Exception $e)
+				{
+					$errMssg = $e->getMessage();
+
+					if($e->getMessage() == "Integrity check failed.") 
+					{
+						$errMssg = ["error" => "wrong_encryption_password"];
+					}
+
+					return View::create($errMssg, Response::HTTP_INTERNAL_SERVER_ERROR, []);
+				}
 			}
 
 			return View::create($notte, Response::HTTP_OK, []);
