@@ -25,7 +25,7 @@
 	     * )
 	     * @SWG\Tag(name="nottes")
 	     */
-		public function index()
+		public function index(Request $request)
 		{
 			$user = $this->get("jwt.user.manager")->getUser();
 
@@ -38,6 +38,13 @@
 					"id" => "DESC"
 				]
 			);
+
+			$paginator  = $this->get('knp_paginator');
+		    $nottes = $paginator->paginate(
+		        $nottes,
+		        $request->query->get("page"),
+		        32 // TODO: create .env parameter
+		    );
 
 			return View::create($nottes, Response::HTTP_OK, []);
 		}
