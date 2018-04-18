@@ -21,6 +21,6 @@
 		    $result = json_decode( $client->getResponse()->getContent(), true );
 
 		    $this->assertEquals(200, $client->getResponse()->getStatusCode());
-		    $this->assertNotEmpty($result[0]);
+		    $this->assertNotEmpty($result['items']);
 	    }
 	}
