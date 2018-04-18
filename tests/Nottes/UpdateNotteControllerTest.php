@@ -15,7 +15,7 @@
 
 	        $client->request(
 		      "PUT",
-		      "/api/notte/1",
+		      "/api/notte/2",
 		      [
 		        "name" => "test updated",
 		        "content" => "phpunit-test updated",
