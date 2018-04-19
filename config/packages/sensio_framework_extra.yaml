@@ -1,0 +1,2 @@
+sensio_framework_extra:
+  view:    { annotations: true }

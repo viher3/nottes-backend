@@ -1,0 +1,38 @@
+App\Entity\Notte:
+    exclusion_policy: ALL
+    properties:
+        
+        id:
+            expose: true
+            groups: 
+                - notteDetail
+
+        name:
+            expose: true
+            groups: 
+                - notteDetail
+
+        content:
+            expose: true
+            groups: 
+                - notteDetail
+
+        tags:
+            expose: true
+            groups: 
+                - notteDetail
+
+        creatorUser:
+            expose: true
+            groups: 
+                - notteDetail
+
+        isEncrypted:
+            expose: true
+            groups: 
+                - notteDetail
+
+        updatedAt:
+            expose: true
+            groups: 
+                - notteDetail

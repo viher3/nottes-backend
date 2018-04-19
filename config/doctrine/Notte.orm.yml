@@ -2,6 +2,7 @@
 App\Entity\Notte:
     type: entity
     table: nottes
+    repositoryClass: App\Repository\NotteRepository
 
     manyToOne:
 

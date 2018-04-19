@@ -29,21 +29,16 @@
 		{
 			$user = $this->get("jwt.user.manager")->getUser();
 
+			// get docs
 			$em = $this->getDoctrine()->getManager();
-			$nottes = $em->getRepository(Notte::class)->findBy(
-				[
-					"creatorUser" => $user
-				],
-				[
-					"id" => "DESC"
-				]
-			);
+			$nottes = $em->getRepository(Notte::class)->getList($user);
 
+			// pagination
 			$paginator  = $this->get('knp_paginator');
 		    $nottes = $paginator->paginate(
 		        $nottes,
 		        $request->query->get("page"),
-		        32 // TODO: create .env parameter
+		        $this->getParameter("pagination_page_limit")
 		    );
 
 			return View::create($nottes, Response::HTTP_OK, []);
