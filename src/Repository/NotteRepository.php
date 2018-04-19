@@ -37,6 +37,7 @@ class NotteRepository extends ServiceEntityRepository
                 FROM App\Entity\Notte d 
                 LEFT JOIN d.creatorUser u 
                 WHERE d.creatorUser = :creatorUser 
+                ORDER BY d.id DESC
                 ";
 
         $query = $entityManager
