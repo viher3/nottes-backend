@@ -21,6 +21,20 @@
 	     *
 	     * @Route("/api/notte/{id}", name="nottes_get", methods={"GET"}).
 	     *
+	     * @SWG\Parameter(
+         *     name="format",
+         *     in="query",
+         *     type="string",
+         *     description="Return content format as specified in the parameter. Possible values: html "
+         * )
+         *
+	     * @SWG\Parameter(
+         *     name="pwd",
+         *     in="query",
+         *     type="string",
+         *     description="Document encryption password. (Only if document is encrypted)."
+         * )
+	     *
 	     * @SWG\Response(
 	     *     response=200,
 	     *     description="Return the notte entity object"
@@ -64,11 +78,14 @@
 				}
 			}
 
-			// convert BBCode to HTML
-			$content = ( new BBCodeCompiler( $notte->getContent() ) )->toHtml();
+			if( $request->query->get("format") == "html" )
+			{
+				// convert BBCode to HTML
+				$content = ( new BBCodeCompiler( $notte->getContent() ) )->toHtml();
 
-			// add new content to the entity
-			$notte->setContent($content);
+				// add new content to the entity
+				$notte->setContent($content);
+			}
 
 			return View::create($notte, Response::HTTP_OK, []);
 		}
