@@ -32,6 +32,11 @@ App\Entity\Notte:
             groups: 
                 - notteDetail
 
+        isDecrypted:
+            expose: true
+            groups: 
+                - notteDetail
+
         updatedAt:
             expose: true
             groups: 
