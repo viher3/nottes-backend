@@ -239,8 +239,8 @@ class Notte
     public function setCreatedValue()
     {
         $currDatetime = new \DateTime();
-        $this->createdAt        = $currDatetime;
-        $this->updatedAt       = $currDatetime;
+        $this->createdAt = $currDatetime;
+        $this->updatedAt = $currDatetime;
     }
 
     public function setUpdatedValue()
