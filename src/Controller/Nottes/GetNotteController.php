@@ -12,6 +12,7 @@
 	use Swagger\Annotations as SWG;
 	use App\Entity\Notte;
 	use App\Services\Encryption\Encryption;
+	use App\Services\Editor\BBCodeCompiler;
 
 	class GetNotteController extends Controller
 	{
@@ -46,6 +47,7 @@
 						base64_decode($request->query->get("pwd"))
 					);
 
+					// add new content to the entity
 					$notte->setContent($decryptedContent);
 					$notte->isDecrypted(true);
 				}
@@ -61,6 +63,12 @@
 					return View::create($errMssg, Response::HTTP_INTERNAL_SERVER_ERROR, []);
 				}
 			}
+
+			// convert BBCode to HTML
+			$content = ( new BBCodeCompiler( $notte->getContent() ) )->toHtml();
+
+			// add new content to the entity
+			$notte->setContent($content);
 
 			return View::create($notte, Response::HTTP_OK, []);
 		}
