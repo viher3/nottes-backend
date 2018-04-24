@@ -7,7 +7,7 @@
 	use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 	use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 
-	final class JwtUserManager
+	class JwtUserManager
 	{
 		private $em;
 		private $tokenStorage;

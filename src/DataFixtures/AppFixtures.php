@@ -22,7 +22,9 @@
     {
       $userManager  = $this->container->get('fos_user.user_manager');
       $user         = $this->createTestUser($manager, $userManager);
-      $this->createTestNote($manager, $user);
+
+      $this->createTestNote($manager, $user, "test-name", "test-content", "test-tags");
+      $this->createTestNote($manager, $user, "lorem ipsum", "lorem ipsum", "lorem,ipsum");
     }
 
     private function createTestUser(ObjectManager $manager, $userManager)
@@ -39,13 +41,13 @@
       return $user;
     }
 
-    private function createTestNote(ObjectManager $manager, $user)
+    private function createTestNote(ObjectManager $manager, $user, $name, $content, $tags)
     {
       $notte = new Notte();
     
-      $notte->setName("test-name");
-      $notte->setContent("test-content");
-      $notte->setTags("test-tags");
+      $notte->setName($name);
+      $notte->setContent($content);
+      $notte->setTags($tags);
       $notte->setIsEncrypted(false);
       $notte->setCreatorUser($user);
 

@@ -35,6 +35,7 @@
 						OR 
 						d.content LIKE :searchTerm
 					)
+					ORDER BY d.id DESC
 					";
 
 			$query = $this->em
