@@ -40,3 +40,9 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@security.token_storage'
             - '@lexik_jwt_authentication.encoder'
+
+    search:
+        public: true
+        class: App\Services\Search\Search
+        arguments:
+            - '@doctrine.orm.entity_manager'
