@@ -20,9 +20,31 @@ class User extends BaseUser
      */
     protected $id;
 
+    protected $language;
+
     public function __construct()
     {
         parent::__construct();
         // your own logic
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLanguage()
+    {
+        return $this->language;
+    }
+
+    /**
+     * @param mixed $language
+     *
+     * @return self
+     */
+    public function setLanguage($language="en")
+    {
+        $this->language = $language;
+
+        return $this;
     }
 }
