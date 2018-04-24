@@ -33,6 +33,7 @@
       $user->setUsername('phpunit');
       $user->setEmail('phpunit@domain.com');
       $user->setPlainPassword('1234');
+      $user->setLanguage('en');
       $user->setEnabled(true);
 
       $manager->persist($user);
