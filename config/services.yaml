@@ -33,6 +33,12 @@ services:
         alias: Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener
 
     # custom services
+    acme_api.event.jwt_created_listener:
+        class: App\Services\User\EventListener\JWTCreatedListener
+        arguments: [ '@request_stack', '@doctrine.orm.entity_manager' ]
+        tags:
+            - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
+
     jwt.user.manager:
         public: true
         class: App\Services\User\JwtUserManager
