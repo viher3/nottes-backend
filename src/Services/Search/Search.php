@@ -19,6 +19,10 @@
 		{
 			if( empty($term) ) return [];
 
+			// url decode
+			$term = urldecode($term);
+
+			// query
 			$dql =  "
 					SELECT 
 					d.id, 
