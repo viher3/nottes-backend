@@ -3,6 +3,9 @@
 	namespace App\Services\User;
 
 	use App\Entity\User;
+	use Doctrine\ORM\EntityManagerInterface;
+	use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+	use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 
 	final class JwtUserManager
 	{
@@ -10,7 +13,11 @@
 		private $tokenStorage;
 		private $jwtAuthEncoder;
 
-		public function __construct($em, $tokenStorage, $jwtAuthEncoder)
+		public function __construct(
+			EntityManagerInterface $em, 
+			TokenStorageInterface $tokenStorage, 
+			JWTEncoderInterface $jwtAuthEncoder
+		)
 		{
 			$this->em 				= $em;
 			$this->tokenStorage 	= $tokenStorage;
