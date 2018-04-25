@@ -44,10 +44,11 @@
 		    $user = $this->em->getRepository(User::class)->findOneBy(
 		    	[ 'username' => $payload['username'] ]
 		    );
-		    
+
 		    // add new data to the payload
 		    $payload['language'] = $user->getLanguage();
-
+		    $payload['nickname'] = $user->getNickname();
+		    
 		    // save data payload
 		    $event->setData($payload);
 		}
