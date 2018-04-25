@@ -22,6 +22,8 @@ class User extends BaseUser
 
     protected $language;
 
+    protected $nickname;
+
     public function __construct()
     {
         parent::__construct();
@@ -44,6 +46,31 @@ class User extends BaseUser
     public function setLanguage($language="en")
     {
         $this->language = $language;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNickname()
+    {
+        if( empty($this->nickname) ) 
+        {
+            $this->nickname = $this->getUsername();
+        }
+
+        return $this->nickname;
+    }
+
+    /**
+     * @param mixed $nickname
+     *
+     * @return self
+     */
+    public function setNickname($nickname)
+    {
+        $this->nickname = $nickname;
 
         return $this;
     }
