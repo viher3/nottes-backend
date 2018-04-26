@@ -48,6 +48,7 @@
 		    // add new data to the payload
 		    $payload['language'] = $user->getLanguage();
 		    $payload['nickname'] = $user->getNickname();
+		    $payload['email'] 	 = $user->getEmail();
 		    
 		    // save data payload
 		    $event->setData($payload);
