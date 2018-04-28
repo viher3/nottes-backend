@@ -64,7 +64,7 @@
     		$postData = $request->request->all();
 
     		// get form
-    		$form = $this->createForm( 'App\Form\NotteType', $notte);
+    		$form = $this->createForm( 'App\Form\Notte\NotteType', $notte);
     		$form->setData( $notte );
     		$form->submit( $postData );
 
