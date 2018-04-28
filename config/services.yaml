@@ -52,3 +52,8 @@ services:
         class: App\Services\Search\Search
         arguments:
             - '@doctrine.orm.entity_manager'
+
+    validate.user.password:
+        public: true
+        class: App\Services\User\ValidateUserPassword
+        arguments: ["@security.token_storage", "@fos_user.user_manager", "@security.encoder_factory"]
