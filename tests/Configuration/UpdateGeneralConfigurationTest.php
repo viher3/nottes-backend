@@ -30,4 +30,25 @@
 		    $this->assertEquals(200, $client->getResponse()->getStatusCode());
 		    $this->assertNotEmpty($result["id"]);
 	    }
+
+	    public function testFormIsInvalid()
+	    {
+	    	$client	= static::createClient();
+	        $client	= ( new AuthenticationHelper() )->getAuthToken($client);
+
+	        $client->request(
+		      "PUT",
+		      "/api/configuration/general",
+		      [
+		      	"nickname" => "test",
+		      	"password" => 1234
+		      ]
+		    );
+
+		    $result = $client->getResponse()->getContent();
+		    $result = json_decode($result, true);
+
+		    $this->assertEquals(422, $client->getResponse()->getStatusCode());
+		    $this->assertNotEmpty($result["form"]["children"]);
+	    }
 	}
