@@ -15,7 +15,13 @@
 
 	        $client->request(
 		      "PUT",
-		      "/api/configuration/general"
+		      "/api/configuration/general",
+		      [
+		      	"nickname" => "test nickname",
+		      	"email" => "phpunit@general-configuration.com",
+		      	//"language" => "es",
+		      	"password" => "1234"
+		      ]
 		    );
 
 		    $result = $client->getResponse()->getContent();

@@ -4,9 +4,12 @@
 
 	use Symfony\Component\Form\AbstractType;
 	use Symfony\Component\Form\FormBuilderInterface;
+
 	use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 	use Symfony\Component\Form\Extension\Core\Type\TextType;
 	use Symfony\Component\Form\Extension\Core\Type\EmailType;
+
+	use Symfony\Component\Validator\Constraints\NotBlank;
 
 	class GeneralConfigurationType extends AbstractType
 	{
@@ -14,16 +17,25 @@
 	    {
 	        $builder
 	            ->add("nickname", TextType::class, [
-	            	"required" => true
+	            	'constraints' => [
+           				new NotBlank()
+           			]
 	            ])
 	            ->add("email", EmailType::class, [
-	            	"required" => true
+	            	'constraints' => [
+           				new NotBlank()
+           			]
 	            ])
 	            ->add("language", TextType::class, [
-	            	"required" => true
+	            	'constraints' => [
+           				new NotBlank()
+           			]
 	            ])
 	            ->add("password", TextType::class, [
-					"mapped" => false	            	
+					"mapped" => false,
+					'constraints' => [
+           				new NotBlank()
+           			]	            	
 	            ])
 	        ;
 	    }

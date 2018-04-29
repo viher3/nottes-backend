@@ -56,7 +56,18 @@
             // get user
             $currentUser = $this->get('jwt.user.manager')->getUser();
 
-            // TODO: Validate form (not empty / validation.yml)
+            // get post data
+            $postData = $request->request->all();
+
+            // create form
+            $form = $this->createForm('App\Form\Configuration\GeneralConfigurationType');
+            $form->submit( $postData );
+
+            // form input validation
+            if( $form->isSubmitted() && ! $form->isValid() )
+            {
+                return View::create($form->getErrors(), Response::HTTP_UNPROCESSABLE_ENTITY, []);
+            }
 
             // check if user confirmation password is correct
             $confirmationPassword = $request->request->get("password");
@@ -68,20 +79,13 @@
                 return View::create(["error" => "invalid_password" ], Response::HTTP_INTERNAL_SERVER_ERROR, []);
             }
 
+            // save form data
+    		$em	= $this->getDoctrine()->getManager();
             
+            
+            return true; // TODO: return new form data
 
-			// get post data
-            /*
-    		$postData = $request->request->all();
-
-    		// get form
-    		$form = $this->createForm( 'App\Form\NotteType', $notte);
-    		$form->setData( $notte );
-    		$form->submit( $postData );
-
-    		if( $form->isSubmitted() && $form->isValid() )
-    		{
-    			$em	= $this->getDoctrine()->getManager();
+                /*
     			
     			try
     			{

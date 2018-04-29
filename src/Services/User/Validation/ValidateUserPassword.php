@@ -2,30 +2,30 @@
 
 	namespace App\Services\User\Validation;
 	
+	use App\Services\User\JwtUserManager;
+
 	class ValidateUserPassword
 	{
-		private $tokenStorage;
-		private $userManager;
+		private $jwtUserManager;
+		private $fosUserManager;
 		private $encoderFactory;
 
-		public function __construct($tokenStorage, $userManager, $encoderFactory)
+		public function __construct(JwtUserManager $jwtUserManager, $fosUserManager, $encoderFactory)
 		{
-			$this->tokenStorage 	= $tokenStorage;
-			$this->userManager 		= $userManager;
+			$this->jwtUserManager 	= $jwtUserManager;
+			$this->userManager 		= $fosUserManager;
 			$this->encoderFactory 	= $encoderFactory;
 		}
 
 		public function passwordIsValid( String $password)
 		{
-			$objCurrentUser = $this->tokenStorage->getToken()->getUser();
+			$currentUser = $this->jwtUserManager->getUser();
 
-			if( empty($objCurrentUser) ) return false;
+			if( empty($currentUser) ) return false;
 
-	        // find user
-	        $user       = $this->userManager->findUserByUsername( $objCurrentUser->getUsername() );
-	        $encoder    = $this->encoderFactory->getEncoder($user);
+	        $encoder = $this->encoderFactory->getEncoder($currentUser);
 
-	        if( $encoder->isPasswordValid( $user->getPassword(), $password, $user->getSalt() ) ) 
+	        if( $encoder->isPasswordValid( $currentUser->getPassword(), $password, $currentUser->getSalt() ) ) 
 	        {
 	        	return true;
 	        }

@@ -55,5 +55,5 @@ services:
 
     validate.user.password:
         public: true
-        class: App\Services\User\ValidateUserPassword
-        arguments: ["@security.token_storage", "@fos_user.user_manager", "@security.encoder_factory"]
+        class: App\Services\User\Validation\ValidateUserPassword
+        arguments: ["@jwt.user.manager", "@fos_user.user_manager", "@security.encoder_factory"]
