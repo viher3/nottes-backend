@@ -81,52 +81,28 @@
 
             // save form data
     		$em	= $this->getDoctrine()->getManager();
+
+            // update entity fields
+            try
+            {
+                $currentUser->setNickname($form['nickname']->getData());
+                $currentUser->setLanguage($form['language']->getData());
+                $currentUser->setEmail($form['email']->getData());
+                $currentUser->setEmailCanonical($form['email']->getData());
+
+                // update user
+                $userManager = $this->container->get('fos_user.user_manager');
+                $userManager->updateUser($currentUser, true);
+            }
+            catch(\Exception $e)
+            {
+                return View::create(
+                    [ 'error' => $e->getMessage() ], 
+                    Response::HTTP_INTERNAL_SERVER_ERROR, 
+                    []
+                );
+            }
             
-            
-            return true; // TODO: return new form data
-
-                /*
-    			
-    			try
-    			{
-    				$notte->setCreatorUser( 
-    					$this->get('jwt.user.manager')->getUser()
-    				);
-
-                    // check if we need to encrypt the document
-                    if( $request->request->get("isEncrypted") )
-                    {
-                        $encryption = new Encryption();
-                        $encryptionResult = $encryption->encrypt(
-                                                $notte->getContent(), 
-                                                $request->request->get("encryptionpwd2")
-                                            );
-
-                        $notte->setContent($encryptionResult);
-                    }
-
-                    // save data
-    				$em->persist($notte);
-        			$em->flush($notte);
-
-        			return View::create($notte, Response::HTTP_OK , []);
-    			}
-    			catch(\Exception $e)
-    			{
-    				return View::create(
-    					[ 
-    						'ERROR' => 'SAVING_DATA', 
-    						'MESSAGES' => $e->getMessage() 
-    					], 
-    					Response::HTTP_INTERNAL_SERVER_ERROR , 
-    					[]
-    				);
-    			}
-    		}
-    		else
-    		{
-    			return View::create($form->getErrors(), Response::HTTP_INTERNAL_SERVER_ERROR, []);
-    		}
-            */
+            return $currentUser;
 		}
 	}

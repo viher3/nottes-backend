@@ -19,17 +19,15 @@
 		      [
 		      	"nickname" => "test nickname",
 		      	"email" => "phpunit@general-configuration.com",
-		      	//"language" => "es",
-		      	"password" => "1234"
+		      	"language" => "es",
+		      	"password" => 1234
 		      ]
 		    );
 
 		    $result = $client->getResponse()->getContent();
-
-		    var_dump($result);
-		    die('---');
+		    $result = json_decode($result, true);
 
 		    $this->assertEquals(200, $client->getResponse()->getStatusCode());
-		    // $this->assertContains("Nottes api!", $result);
+		    $this->assertNotEmpty($result["id"]);
 	    }
 	}
