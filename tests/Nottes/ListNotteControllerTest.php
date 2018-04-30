@@ -19,7 +19,8 @@
 		    );
 
 		    $result = json_decode( $client->getResponse()->getContent(), true );
-
+var_dump($result);
+die('---');
 		    $this->assertEquals(200, $client->getResponse()->getStatusCode());
 		    $this->assertGreaterThan(0, $result['total_count']);
 	    }
