@@ -10,6 +10,7 @@
 	use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 	use Symfony\Component\Validator\Constraints\NotBlank;
+	use Symfony\Component\Validator\Constraints\Email;
 
 	class GeneralConfigurationType extends AbstractType
 	{
@@ -23,7 +24,8 @@
 	            ])
 	            ->add("email", EmailType::class, [
 	            	'constraints' => [
-           				new NotBlank()
+           				new NotBlank(),
+           				new Email()
            			]
 	            ])
 	            ->add("language", TextType::class, [

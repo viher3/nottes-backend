@@ -52,6 +52,30 @@
 		    $this->assertNotEmpty($result["form"]["children"]);
 	    }
 
+	    public function testFormInvalidEmail()
+	    {
+	    	$client	= static::createClient();
+	        $client	= ( new AuthenticationHelper() )->getAuthToken($client);
+
+	        $client->request(
+		      "PUT",
+		      "/api/configuration/general",
+		      [
+		      	"nickname" => "test nickname",
+		      	"email" => "phpunit",
+		      	"language" => "es",
+		      	"password" => 1234
+		      ]
+		    );
+
+		    $result = $client->getResponse()->getContent();
+		    $result = json_decode($result, true);
+		    
+		    $this->assertEquals(422, $client->getResponse()->getStatusCode());
+		    $this->assertNotEmpty($result["form"]["children"]["email"]["errors"]);
+		    $this->assertEquals($result["form"]["children"]["email"]["errors"][0], "This value is not a valid email address.");
+	    }
+
 	    public function testInvalidPassword()
 	    {
 	    	$client	= static::createClient();
@@ -85,7 +109,7 @@
 		      "/api/configuration/general",
 		      [
 		      	"nickname" => new \stdClass(),
-		      	"email" => "phpunit",
+		      	"email" => "phpunit@gmail.com",
 		      	"language" => "es",
 		      	"password" => 1234
 		      ]
