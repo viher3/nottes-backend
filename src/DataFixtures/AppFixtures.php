@@ -21,17 +21,19 @@
     public function load(ObjectManager $manager)
     {
       $userManager  = $this->container->get('fos_user.user_manager');
-      $user         = $this->createTestUser($manager, $userManager);
+      $user         = $this->createTestUser($manager, $userManager, 'phpunit');
+      $user2        = $this->createTestUser($manager, $userManager, 'phpunit2');
 
       $this->createTestNote($manager, $user, "test-name", "test-content", "test-tags");
       $this->createTestNote($manager, $user, "lorem ipsum", "lorem ipsum", "lorem,ipsum");
+      $this->createTestNote($manager, $user2, "lorem ipsum user 2", "lorem ipsum user 2", "lorem,ipsum");
     }
 
-    private function createTestUser(ObjectManager $manager, $userManager)
+    private function createTestUser(ObjectManager $manager, $userManager, $username)
     {
       $user = $userManager->createUser();
-      $user->setUsername('phpunit');
-      $user->setEmail('phpunit@domain.com');
+      $user->setUsername($username);
+      $user->setEmail($username . '@domain.com');
       $user->setPlainPassword('1234');
       $user->setLanguage('en');
       $user->setEnabled(true);
