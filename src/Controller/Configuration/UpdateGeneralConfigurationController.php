@@ -51,8 +51,6 @@
 	     */
 		public function index(Request $request)
 		{
-            $em = $this->getDoctrine()->getManager();
-
             // get user
             $currentUser = $this->get('jwt.user.manager')->getUser();
 
@@ -103,6 +101,6 @@
                 );
             }
             
-            return $currentUser;
+            return View::create($currentUser, Response::HTTP_OK, []);
 		}
 	}
