@@ -2,7 +2,6 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
-    env(PAGINATION_PAGE_LIMIT): 20
     pagination_page_limit: '%env(resolve:PAGINATION_PAGE_LIMIT)%'
 
 services:
