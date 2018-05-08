@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "45134fa84ed0f178eb9707972ee06b3f",
+    "content-hash": "6ac99d329f40a1170217c797935e0708",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.54.4",
+            "version": "3.55.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "6642a13df7ddcccf19e66c744c5bfae5b61e9e85"
+                "reference": "28a1828814ce34d056492fa494f1e4bbaddaf33e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6642a13df7ddcccf19e66c744c5bfae5b61e9e85",
-                "reference": "6642a13df7ddcccf19e66c744c5bfae5b61e9e85",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/28a1828814ce34d056492fa494f1e4bbaddaf33e",
+                "reference": "28a1828814ce34d056492fa494f1e4bbaddaf33e",
                 "shasum": ""
             },
             "require": {
@@ -84,7 +84,7 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2018-04-10T22:11:31+00:00"
+            "time": "2018-04-26T21:09:13+00:00"
         },
         {
             "name": "aws/aws-sdk-php-symfony",
@@ -141,16 +141,16 @@
         },
         {
             "name": "defuse/php-encryption",
-            "version": "v2.1.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/defuse/php-encryption.git",
-                "reference": "5176f5abb38d3ea8a6e3ac6cd3bbb54d8185a689"
+                "reference": "0d4d27c368ca6798bc162469e43248c363c73495"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/defuse/php-encryption/zipball/5176f5abb38d3ea8a6e3ac6cd3bbb54d8185a689",
-                "reference": "5176f5abb38d3ea8a6e3ac6cd3bbb54d8185a689",
+                "url": "https://api.github.com/repos/defuse/php-encryption/zipball/0d4d27c368ca6798bc162469e43248c363c73495",
+                "reference": "0d4d27c368ca6798bc162469e43248c363c73495",
                 "shasum": ""
             },
             "require": {
@@ -159,7 +159,7 @@
                 "php": ">=5.4.0"
             },
             "require-dev": {
-                "nikic/php-parser": "^2.0|^3.0",
+                "nikic/php-parser": "^2.0|^3.0|^4.0",
                 "phpunit/phpunit": "^4|^5"
             },
             "bin": [
@@ -200,7 +200,7 @@
                 "security",
                 "symmetric key cryptography"
             ],
-            "time": "2017-05-18T21:28:48+00:00"
+            "time": "2018-04-23T19:33:40+00:00"
         },
         {
             "name": "doctrine/annotations",
@@ -561,16 +561,16 @@
         },
         {
             "name": "doctrine/doctrine-bundle",
-            "version": "1.9.0",
+            "version": "1.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineBundle.git",
-                "reference": "b2754fd483b73d002f80dd846222887edae3e748"
+                "reference": "703fad32e4c8cbe609caf45a71a1d4266c830f0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/b2754fd483b73d002f80dd846222887edae3e748",
-                "reference": "b2754fd483b73d002f80dd846222887edae3e748",
+                "url": "https://api.github.com/repos/doctrine/DoctrineBundle/zipball/703fad32e4c8cbe609caf45a71a1d4266c830f0f",
+                "reference": "703fad32e4c8cbe609caf45a71a1d4266c830f0f",
                 "shasum": ""
             },
             "require": {
@@ -642,7 +642,7 @@
                 "orm",
                 "persistence"
             ],
-            "time": "2018-04-16T15:02:26+00:00"
+            "time": "2018-04-19T14:07:39+00:00"
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
@@ -1491,16 +1491,16 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.3.2",
+            "version": "6.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "68d0ea14d5a3f42a20e87632a5f84931e2709c90"
+                "reference": "407b0cb880ace85c9b63c5f9551db498cb2d50ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/68d0ea14d5a3f42a20e87632a5f84931e2709c90",
-                "reference": "68d0ea14d5a3f42a20e87632a5f84931e2709c90",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/407b0cb880ace85c9b63c5f9551db498cb2d50ba",
+                "reference": "407b0cb880ace85c9b63c5f9551db498cb2d50ba",
                 "shasum": ""
             },
             "require": {
@@ -1510,7 +1510,7 @@
             },
             "require-dev": {
                 "ext-curl": "*",
-                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.4",
+                "phpunit/phpunit": "^4.8.35 || ^5.7 || ^6.4 || ^7.0",
                 "psr/log": "^1.0"
             },
             "suggest": {
@@ -1552,7 +1552,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2018-03-26T16:33:04+00:00"
+            "time": "2018-04-22T15:46:56+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -3970,16 +3970,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.0.78",
+            "version": "v1.0.79",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "eead30b31db70691cd1fd1e7225190c818a1a5f6"
+                "reference": "399e72968d5baa698788e6116fe0f47f269724e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/eead30b31db70691cd1fd1e7225190c818a1a5f6",
-                "reference": "eead30b31db70691cd1fd1e7225190c818a1a5f6",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/399e72968d5baa698788e6116fe0f47f269724e0",
+                "reference": "399e72968d5baa698788e6116fe0f47f269724e0",
                 "shasum": ""
             },
             "require": {
@@ -4012,7 +4012,7 @@
                     "email": "fabien.potencier@gmail.com"
                 }
             ],
-            "time": "2018-03-27T10:04:58+00:00"
+            "time": "2018-04-27T05:19:26+00:00"
         },
         {
             "name": "symfony/form",
@@ -4574,22 +4574,22 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.4.0",
+            "version": "v1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "253cee42124de11dc0a5bb7c91e5375d7197be12"
+                "reference": "8713152f523b337177163a328485ea6a39fae7ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/253cee42124de11dc0a5bb7c91e5375d7197be12",
-                "reference": "253cee42124de11dc0a5bb7c91e5375d7197be12",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/8713152f523b337177163a328485ea6a39fae7ad",
+                "reference": "8713152f523b337177163a328485ea6a39fae7ad",
                 "shasum": ""
             },
             "require": {
                 "doctrine/inflector": "^1.2",
                 "nikic/php-parser": "^4.0",
-                "php": "^7.1.3",
+                "php": "^7.0.8",
                 "symfony/config": "^3.4|^4.0",
                 "symfony/console": "^3.4|^4.0",
                 "symfony/dependency-injection": "^3.4|^4.0",
@@ -4601,7 +4601,7 @@
             "require-dev": {
                 "allocine/twigcs": "^3.0",
                 "doctrine/doctrine-bundle": "^1.8",
-                "doctrine/orm": "^2.6",
+                "doctrine/orm": "^2.3",
                 "friendsofphp/php-cs-fixer": "^2.8",
                 "symfony/phpunit-bridge": "^3.4|^4.0",
                 "symfony/process": "^3.4|^4.0"
@@ -4635,7 +4635,7 @@
                 "scaffold",
                 "scaffolding"
             ],
-            "time": "2018-04-11T22:44:12+00:00"
+            "time": "2018-04-19T17:28:47+00:00"
         },
         {
             "name": "symfony/options-resolver",
@@ -6123,16 +6123,16 @@
         },
         {
             "name": "zendframework/zend-eventmanager",
-            "version": "3.2.0",
+            "version": "3.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/zendframework/zend-eventmanager.git",
-                "reference": "9d72db10ceb6e42fb92350c0cb54460da61bd79c"
+                "reference": "a5e2583a211f73604691586b8406ff7296a946dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/9d72db10ceb6e42fb92350c0cb54460da61bd79c",
-                "reference": "9d72db10ceb6e42fb92350c0cb54460da61bd79c",
+                "url": "https://api.github.com/repos/zendframework/zend-eventmanager/zipball/a5e2583a211f73604691586b8406ff7296a946dd",
+                "reference": "a5e2583a211f73604691586b8406ff7296a946dd",
                 "shasum": ""
             },
             "require": {
@@ -6141,7 +6141,7 @@
             "require-dev": {
                 "athletic/athletic": "^0.1",
                 "container-interop/container-interop": "^1.1.0",
-                "phpunit/phpunit": "^6.0.7 || ^5.7.14",
+                "phpunit/phpunit": "^5.7.27 || ^6.5.8 || ^7.1.2",
                 "zendframework/zend-coding-standard": "~1.0.0",
                 "zendframework/zend-stdlib": "^2.7.3 || ^3.0"
             },
@@ -6173,7 +6173,7 @@
                 "events",
                 "zf2"
             ],
-            "time": "2017-07-11T19:17:22+00:00"
+            "time": "2018-04-25T15:33:34+00:00"
         },
         {
             "name": "zircote/swagger-php",

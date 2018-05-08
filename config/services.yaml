@@ -2,7 +2,6 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
-    env(PAGINATION_PAGE_LIMIT): 20
     pagination_page_limit: '%env(resolve:PAGINATION_PAGE_LIMIT)%'
 
 services:
@@ -58,3 +57,8 @@ services:
         class: App\Services\Search\Search
         arguments:
             - '@doctrine.orm.entity_manager'
+
+    validate.user.password:
+        public: true
+        class: App\Services\User\Validation\ValidateUserPassword
+        arguments: ["@jwt.user.manager", "@fos_user.user_manager", "@security.encoder_factory"]
