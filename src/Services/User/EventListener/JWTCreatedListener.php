@@ -6,6 +6,7 @@
 	use Symfony\Component\HttpFoundation\RequestStack;
 	use Doctrine\ORM\EntityManagerInterface;
 	use App\Entity\User;
+	use App\Services\User\SaveUserInfoToLog;
 
 	class JWTCreatedListener
 	{
@@ -52,5 +53,9 @@
 		    
 		    // save data payload
 		    $event->setData($payload);
+
+		    // save user info into login log
+		    $saveUserInfoToLog = new SaveUserInfoToLog($this->em);
+		    $saveUserInfoToLog->saveUserInfo($user->getEmail(), true);
 		}
 	}
