@@ -8,6 +8,7 @@
   use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
   use App\Entity\Notte;
+  use App\Services\Encryption\Encryption;
 
   class AppFixtures extends Fixture implements ContainerAwareInterface
   {
@@ -27,6 +28,7 @@
       $this->createTestNote($manager, $user, "test-name", "test-content", "test-tags");
       $this->createTestNote($manager, $user, "lorem ipsum", "lorem ipsum", "lorem,ipsum");
       $this->createTestNote($manager, $user2, "lorem ipsum user 2", "lorem ipsum user 2", "lorem,ipsum");
+      $this->createTestNote($manager, $user, "encrypted", "encrypted", "encrypted,doc", true, "123456");
     }
 
     private function createTestUser(ObjectManager $manager, $userManager, $username)
@@ -44,14 +46,28 @@
       return $user;
     }
 
-    private function createTestNote(ObjectManager $manager, $user, $name, $content, $tags)
+    private function createTestNote(
+      ObjectManager $manager, 
+      $user, 
+      $name, 
+      $content, 
+      $tags, 
+      $isEncrypted=false, 
+      $encriptionPwd="1234"
+    )
     {
       $notte = new Notte();
     
+      if($isEncrypted)
+      {
+        $encryption = new Encryption();
+        $content = $encryption->encrypt($content, $encriptionPwd);
+      }
+
       $notte->setName($name);
       $notte->setContent($content);
       $notte->setTags($tags);
-      $notte->setIsEncrypted(false);
+      $notte->setIsEncrypted($isEncrypted);
       $notte->setCreatorUser($user);
 
       $manager->persist($notte);

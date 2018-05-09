@@ -55,10 +55,15 @@
 			{
 				try
 				{
+					$encryptionPwd = $request->query->get("pwd");
+					$encryptionPwd = ( $this->isBase64($encryptionPwd) )
+									 ? base64_decode($encryptionPwd)
+									 : $encryptionPwd;
+
 					$encryption = new Encryption();
 					$decryptedContent = $encryption->decrypt(
 						$notte->getContent(),
-						base64_decode($request->query->get("pwd"))
+						$encryptionPwd
 					);
 
 					// add new content to the entity
@@ -88,5 +93,10 @@
 			}
 
 			return View::create($notte, Response::HTTP_OK, []);
+		}
+
+		private function isBase64(string $str)
+		{
+			return ( ( base64_encode( base64_decode($str, true) ) === $str) ) ? true : false;
 		}
 	}
