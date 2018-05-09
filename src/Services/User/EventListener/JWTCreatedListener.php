@@ -23,10 +23,15 @@
 		/**
 		 * @param RequestStack $requestStack
 		 */
-		public function __construct(RequestStack $requestStack, EntityManagerInterface $em)
+		public function __construct(
+			RequestStack $requestStack, 
+			EntityManagerInterface $em,
+			SaveUserInfoToLog $saveUserInfo
+		)
 		{
 		    $this->em = $em;
 		    $this->requestStack = $requestStack;
+		    $this->saveUserInfo = $saveUserInfo;
 		}
 
 		/**
@@ -55,7 +60,6 @@
 		    $event->setData($payload);
 
 		    // save user info into login log
-		    $saveUserInfoToLog = new SaveUserInfoToLog($this->em);
-		    $saveUserInfoToLog->saveUserInfo($user->getEmail(), true);
+		    $this->saveUserInfo->saveUserInfo($user->getEmail(), true);
 		}
 	}

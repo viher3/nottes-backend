@@ -23,10 +23,15 @@
 		/**
 		 * @param RequestStack $requestStack
 		 */
-		public function __construct(RequestStack $requestStack, EntityManagerInterface $em)
+		public function __construct(
+			RequestStack $requestStack, 
+			EntityManagerInterface $em,
+			SaveUserInfoToLog $saveUserInfo
+		)
 		{
 		    $this->em = $em;
 		    $this->requestStack = $requestStack;
+		    $this->saveUserInfo = $saveUserInfo;
 		}
 
 		/**
@@ -38,8 +43,7 @@
 		    $request = $this->requestStack->getCurrentRequest();
 		    $email = $request->request->get("_username");
 
-		    $saveUserInfoToLog = new SaveUserInfoToLog($this->em);
-		    $saveUserInfoToLog->saveUserInfo($email, true);
+		    $this->saveUserInfo->saveUserInfo($email, true);
 		    
 		    // set response
 		    $data = [

@@ -10,9 +10,10 @@
 	{
 		private $em;
 
-		public function __construct(EntityManagerInterface $em)
+		public function __construct(EntityManagerInterface $em, $environment)
 		{
-			$this->em = $em;
+			$this->em 			= $em;
+			$this->environment 	= $environment;
 		}
 
 		public function saveUserInfo(string $email, bool $isSuccessfulLogin)
@@ -30,11 +31,14 @@
 
 		private function getUserAgent()
 		{
+			if( $this->environment == "test" ) return 'travis';
 			return $_SERVER['HTTP_USER_AGENT'];
 		}
 
 		private function getClientIp() 
 		{
+			if( $this->environment == "test" ) return '127.0.0.1';
+
 			$ip = "unknown";
 
 		    if( ! empty($_SERVER['HTTP_CLIENT_IP']))

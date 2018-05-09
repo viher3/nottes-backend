@@ -34,13 +34,13 @@ services:
     # custom services
     acme_api.event.jwt_created_listener:
         class: App\Services\User\EventListener\JWTCreatedListener
-        arguments: [ '@request_stack', '@doctrine.orm.entity_manager' ]
+        arguments: [ '@request_stack', '@doctrine.orm.entity_manager', '@save.user.info.log' ]
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
 
     acme_api.event.authentication_failure_listener:
         class: App\Services\User\EventListener\AuthenticationFailureListener
-        arguments: [ '@request_stack', '@doctrine.orm.entity_manager' ]
+        arguments: [ '@request_stack', '@doctrine.orm.entity_manager', '@save.user.info.log' ]
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_failure, method: onAuthenticationFailureResponse }
 
@@ -51,6 +51,13 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@security.token_storage'
             - '@lexik_jwt_authentication.encoder'
+
+    save.user.info.log:
+        public: true
+        class: App\Services\User\SaveUserInfoToLog
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '%kernel.environment%'
 
     search:
         public: true
