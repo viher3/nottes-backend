@@ -44,6 +44,26 @@
 		    $this->assertEquals($result['content'], "encrypted");
 	    }
 
+	    public function testGetError()
+	    {
+	    	$client	= static::createClient();
+	        $client	= ( new AuthenticationHelper() )->getAuthToken($client);
+
+	        $client->request(
+		      "GET",
+		      "/api/notte/4",
+		      [
+		      	"pwd" => "wrong_pwd"
+		      ]
+		    );
+
+		    $result = json_decode( $client->getResponse()->getContent(), true );
+
+		    $this->assertEquals(500, $client->getResponse()->getStatusCode());
+		    $this->assertNotEmpty($result['error']);
+		    $this->assertEquals($result['error'], "wrong_encryption_password");
+	    }
+
 	    public function testUnauthorizedDoc()
 	    {
 	    	$client	= static::createClient();
