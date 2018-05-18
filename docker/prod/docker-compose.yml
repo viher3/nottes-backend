@@ -1,7 +1,7 @@
 version: "2"
 services:
 
-    webserver:
+    webserver-nottes-backend:
       image: nginx:alpine
       container_name: nottes-webserver
       working_dir: /application
@@ -11,7 +11,7 @@ services:
       ports:
        - "8083:80"
 
-    php-fpm:
+    php-fpm-nottes-backend:
       build: phpdocker/php-fpm
       container_name: nottes-php-fpm
       working_dir: /application
