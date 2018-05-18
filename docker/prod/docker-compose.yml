@@ -6,19 +6,21 @@ services:
       container_name: nottes-webserver
       working_dir: /application
       volumes:
-          - ../../:/application
+          - ../..:/application
           - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
           - ../../var/log/nginx:/var/log/nginx
           - /var/www/ssl_certs:/var/www/ssl_certs
       ports:
        - "8083:80"
+      links:
+       - php-fpm-nottes-backend
 
     php-fpm-nottes-backend:
       build: phpdocker/php-fpm
       container_name: nottes-php-fpm
       working_dir: /application
       volumes:
-        - ../../:/application
+        - ../..:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
       ports:
         - "9003:9000"
