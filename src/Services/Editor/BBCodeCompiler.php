@@ -40,7 +40,7 @@
 
 			// search with regex
 			$regex = [
-				['image', '\[image\](.)*?\[\/image\]']
+				['image', '\[image\](.*?)\[\/image\]']
 			];
 
 			// process
@@ -52,23 +52,22 @@
 			foreach($regex as $reg)
 			{
 				$code = $reg[0];
-				preg_match('/' . $reg[1] . '/', $this->content, $matches);
+				preg_match_all('/' . $reg[1] . '/', $this->content, $matches);
 
-				if($code == "image") $this->generateImage($matches);
+				if($code == "image") $this->generateImages($matches);
 			}
-
 			$this->html = $this->content;
 		}
 
-		private function generateImage($matches)
+		private function generateImages($matches)
 		{
-			if( empty($matches[0]) && empty($matches[1]) ) return;
+			if( empty($matches[1]) ) return;
 
-			$full 	= $matches[0];
-			$url 	= str_replace(array("[image]","[/image]"), "", $full);
+			foreach($matches[1] as $key => $imageUrl)
+			{
+				$html = '<img src="' . $imageUrl . '" />';
+				$this->content = str_replace($matches[0][$key], $html, $this->content);
+			}
 
-			$html = '<img src="' . $url . '" />';
-
-			$this->content = str_replace($full, $html, $this->content);
 		} 
 	}
