@@ -40,7 +40,7 @@
 
 			// search with regex
 			$regex = [
-				['image', '\[image\](.*)\[\/image\]']
+				['image', '\[image\](.)*?\[\/image\]']
 			];
 
 			// process
@@ -65,7 +65,7 @@
 			if( empty($matches[0]) && empty($matches[1]) ) return;
 
 			$full 	= $matches[0];
-			$url 	= $matches[1];
+			$url 	= str_replace(array("[image]","[/image]"), "", $full);
 
 			$html = '<img src="' . $url . '" />';
 
