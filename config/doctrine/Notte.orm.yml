@@ -20,6 +20,9 @@ App\Entity\Notte:
         name:
             type: string
             length: 255
+        type:
+            type: string
+            length: 5
         content:
             type: text
         tags:

@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="nottes")
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="App\Repository\NotteRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Notte
 {
@@ -28,6 +29,13 @@ class Notte
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=5)
+     */
+    private $type;
 
     /**
      * @var string
@@ -75,6 +83,11 @@ class Notte
      */
     private $creatorUser;
 
+    public function __construct()
+    {
+        $this->type = "doc";
+    }
+
     /**
      * @return int
      */
@@ -111,6 +124,26 @@ class Notte
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
 
         return $this;
     }
