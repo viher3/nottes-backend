@@ -63,6 +63,9 @@
     			try
     			{
     				$link->setType("link");
+    				$link->setCreatorUser( 
+    					$this->get('jwt.user.manager')->getUser()
+    				);
 
 	    			// save data
 					$em->persist($link);
