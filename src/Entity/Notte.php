@@ -86,6 +86,7 @@ class Notte
     public function __construct()
     {
         $this->type = "doc";
+        $this->isEncrypted = false;
     }
 
     /**

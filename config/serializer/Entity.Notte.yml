@@ -12,6 +12,11 @@ App\Entity\Notte:
             groups: 
                 - notteDetail
 
+        type:
+            expose: true
+            groups: 
+                - notteDetail
+
         content:
             expose: true
             groups: 
