@@ -27,7 +27,13 @@
 					SELECT 
 					d.id, 
 					d.name, 
-					d.tags
+					d.tags,
+					d.type,
+					d.isEncrypted,
+					CASE WHEN (d.type = 'link') THEN d.content ELSE '' END AS content,
+					u.id AS creatorUserId,
+					u.username AS creatorUsername,
+					d.updatedAt
 					FROM App\Entity\Notte d
 					LEFT JOIN d.creatorUser u 
 					WHERE u = :creatorUser
