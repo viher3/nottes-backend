@@ -11,12 +11,10 @@
 	use Nelmio\ApiDocBundle\Annotation\Model;
 	use Swagger\Annotations as SWG;
 	use App\Entity\Notte;
-	use Aws\S3\S3Client;
-	use Aws\S3\S3Exception;
 	use App\Services\Upload\FileSanitizer;
 	use App\Services\Upload\FileValidator;
 
-	class ImageUploadController extends Controller
+	class FileUploadController extends Controller
 	{
 		/**
 	     * Upload an image
@@ -29,8 +27,10 @@
 	     * )
 	     * @SWG\Tag(name="uploads")
 	     */
-		public function index(Request $request, S3Client $s3)
+		public function index(Request $request)
 		{
+			$result = [];
+
 			// get file object
 			$file = $request->files->get("file");
 
@@ -38,43 +38,43 @@
 			$filename 		= $file->getClientOriginalName();
 			$newFilename 	= ( new FileSanitizer() )->sanitize($filename);
 
+			// TODO: check if filename already exists.
+
 			// validate file
 			$validator = new FileValidator();
 
 			if( ! $validator->validateImage($file) )
 			{
-				return View::create(["error" => $validator->getError() ], Response::HTTP_INTERNAL_SERVER_ERROR, []);
+				return  View::create(
+							["error" => $validator->getError()], 
+							Response::HTTP_INTERNAL_SERVER_ERROR, []
+						);
 			}
 
 			// create temp dir
-			$tempDir = $this->get("kernel")->getRootDir() . "/../public/temp/";
+			$uploadDir = $this->getParameter("uploadDir");
 
-			if( ! file_exists($tempDir) ) mkdir($tempDir, 0777, true);
+			if( ! file_exists($uploadDir) ) mkdir($uploadDir, 0777, true);
 
-			// move file to temp dir
-			if( $file->move($tempDir, $filename) )
+			// move file to the upload dir
+			try
 			{
-				$filepath = $tempDir . $filename;
+				$file->move($uploadDir, $filename);
+				$filepath = $uploadDir . $filename;
 
-				try
-				{
-					// upload to object storage
-					$insert = $s3->putObject([
-						'Bucket' => 'reaccionestudio1',
-						'Key' 	 => 'nottes/' . $newFilename,
-						'Body' 	 => fopen($filepath, "r"),
-						'ACL'    => 'public-read'
-					]);
-
-					// delete temp file
-					unlink($filepath);
-				} 
-				catch (Aws\S3\Exception\S3Exception $e) 
-				{
-					return View::create($e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR, []);
-				}
+				$result = [
+							'filepath' => $filepath,
+							'fileInfo' => $file
+						  ];
+			}
+			catch(\Exception $e)
+			{
+				return 	View::create(
+							["error" => $e->getError()],
+				 			Response::HTTP_INTERNAL_SERVER_ERROR, []
+				 		);
 			}
 
-    		return View::create($insert, Response::HTTP_OK, []);
+			return View::create($result, Response::HTTP_OK, []);
 		}
 	}
