@@ -20,13 +20,13 @@
 			// Convert to lowercase
 			$value = strtolower($value);
 
-			// Remove non alphanumeric characters
-			$value = preg_replace("/[^a-z0-9\_\-\.]/i", '', $value);
-
 			// Replace rules
 			$value = str_replace("ñ", "n", $value);
 			$value = str_replace(array(" ", "-"), "_", $value);
 			$value = trim($value);
+			
+			// Remove non alphanumeric characters
+			$value = preg_replace("/[^a-z0-9\_\-\.]/i", '', $value);
 
 			return $value;
 		}
