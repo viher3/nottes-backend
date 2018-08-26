@@ -10,7 +10,7 @@
 		public function testSanitize()
 		{
 			$fileSanitizer = new FileSanitizer();
-			$result = $fileSanitizer->sanitize("?¿ñññ$·");
+			$result = $fileSanitizer->sanitize("?¿ñññ$");
 
 			$this->assertStringEndsWith("n", $result);
 		}
