@@ -19,7 +19,7 @@
 		/**
 	     * Upload an image
 	     *
-	     * @Route("/upload/image", name="upload_image", methods={"POST"}).
+	     * @Route("/api/upload", name="upload_image", methods={"POST"}).
 	     *
 	     * @SWG\Response(
 	     *     response=200,
@@ -29,10 +29,13 @@
 	     */
 		public function index(Request $request)
 		{
+			// TODO: update to upload multiple files
+			return $request->files->get("files");
+
 			$result = [];
 
 			// get file object
-			$file = $request->files->get("file");
+			$file = $request->files->get("files");
 
 			// get file attributes
 			$filename 		= $file->getClientOriginalName();
