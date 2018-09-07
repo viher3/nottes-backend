@@ -5,7 +5,7 @@
 	/** 
 	 * Sanitizes a file name string.
 	 * 
-	 * @author alberto@albertolabs.com
+	 * @author Alberto Vian - alberto@albertolabs.com
 	 */
 	class FileSanitizer
 	{	
