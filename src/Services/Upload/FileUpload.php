@@ -3,8 +3,8 @@
 	namespace App\Services\Upload;
 
 	use App\Entity\Notte;
-	use App\Services\Upload\FileSanitizer;
 	use App\Services\Upload\FileValidator;
+	use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 	/** 
 	 * Upload files to the server.
@@ -19,11 +19,17 @@
 		 */
 		private $files;
 
-		public function __construct(Array $files)
+		public function __construct(Array $files, String $uploadDir)
 		{
-			$this->files = $files;
+			$this->files 		= $files;
+			$this->uploadDir 	= $uploadDir . ( new \DateTime() )->format("Y/m/d/");
 		}
 
+		/**
+		 * Upload all files included in the array
+		 *
+		 * @return Array 	$uploadFiles 	Array with the uploaded files info
+		 */
 		public function uploadFiles()
 		{
 			$uploadedFiles = [];
@@ -41,24 +47,32 @@
 			return $uploadFiles;
 		}
 
-		private function uploadSingleFile($file)
+		/** 
+		 * Upload a single file to the server
+		 *
+		 * @param 	UploadedFile 	$file 	File to upload
+		 * @return 	Array 			[type]	Array with the file upload result
+		 */
+		private function uploadSingleFile(UploadedFile $file)
 		{
 			// get file attributes
-			$filename 		= $file->getClientOriginalName();
-			$newFilename 	= ( new FileSanitizer() )->sanitize($filename);
-
-			// TODO: check if filename already exists.
+			$fileHash = $this->generateFileHash($file);
 
 			// create temp dir
-			$uploadDir = $this->getParameter("uploadDir"); // TODO: set upload dir
+			if( ! file_exists($this->uploadDir) ) 
+			{
+				mkdir($this->uploadDir, 0777, true);
+			}
 
-			if( ! file_exists($uploadDir) ) mkdir($uploadDir, 0777, true);
+			// check if filename already exists
+			$filepath = $this->uploadDir . $fileHash;
 
 			// move file to the upload dir
 			try
 			{
-				$file->move($uploadDir, $newFilename);
-				$filepath = $uploadDir . $newFilename;
+				$file->move($this->uploadDir, $fileHash);
+
+				// TODO: create document entity
 
 				return [
 						'filepath' => $filepath,
@@ -70,5 +84,24 @@
 				// TODO: log error
 				throw $e;
 			}
+		}
+
+		/**
+		 * Generate a unique hash for the file
+		 *
+		 * @return String   	Generate hash for the file.
+		 */
+		private function generateFileHash(UploadedFile $file)
+		{
+			// Get file attributes
+			$originalFilename 	= $file->getClientOriginalName();
+			$fileExtension 		= $file->guessExtension();
+			$fileSize 			= $file->getClientSize();
+			$currentDatetime 	= ( new \DateTime() )->format("YmdHis");
+
+			// Generate hash string
+			$hash = $originalFilename . "_" . $fileExtension . "_" . $fileSize . $currentDatetime;
+
+			return hash('sha256', $hash);
 		}
 	}
