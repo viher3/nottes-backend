@@ -100,7 +100,7 @@
 			$currentDatetime 	= ( new \DateTime() )->format("YmdHis");
 
 			// Generate hash string
-			$hash = $originalFilename . "_" . $fileExtension . "_" . $fileSize . $currentDatetime;
+			$hash = $originalFilename . "_" . $fileExtension . "_" . $fileSize . "_" . $currentDatetime;
 
 			return hash('sha256', $hash);
 		}
