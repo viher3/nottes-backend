@@ -1,0 +1,47 @@
+# config/doctrine/Document.orm.yml
+App\Entity\Document:
+    type: entity
+    table: documents
+    repositoryClass: App\Repository\DocumentRepository
+
+    manyToOne:
+
+        notte:
+          targetEntity: App\Entity\Notte
+          joinColumn:
+            name: notte_id
+            referencedColumnName: id
+
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        
+        name:
+            type: string
+            length: 255
+        
+        path:
+            type: string
+            length: 255
+        
+        size:
+            type: decimal
+            length: 50
+
+        mimetype:
+            type: string
+            length: 255
+
+        tags:
+            type: string
+            length: 255
+            nullable: true
+
+        createdAt:
+            type: datetime
+
+    lifecycleCallbacks: 
+        prePersist: [ setCreatedValue ]
+        preUpdate: [ setUpdatedValue ]
