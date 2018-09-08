@@ -28,3 +28,6 @@
 ###< symfony/phpunit-bridge ###
 
 .env
+
+### other files ###
+var/log/nginx/error.log
