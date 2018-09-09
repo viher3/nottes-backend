@@ -5,6 +5,7 @@
 	use Symfony\Component\Routing\Annotation\Route;
 	use Symfony\Component\HttpFoundation\Request;
 
+	use JMS\Serializer\SerializationContext;
 	use FOS\RestBundle\Controller\FOSRestController;
 	use FOS\RestBundle\Context\Context;
 	use FOS\RestBundle\View\View;
@@ -31,26 +32,21 @@
 
 			// get docs
 			$em = $this->getDoctrine()->getManager();
-			//$nottes = $em->getRepository(Notte::class)->getList($user);
-			$nottes = $em->getRepository(Notte::class)->findAll();
-
-			// TODO: knp_paginator breaks the serializer group
+			$nottes = $em->getRepository(Notte::class)->getList($user);
 
 			// pagination
-			/*
-			$paginator  = $this->get('knp_paginator');
+			$paginator = $this->get('knp_paginator');
 		    $nottes = $paginator->paginate(
 		        $nottes,
 		        $request->query->get("page"),
 		        $this->getParameter("pagination_page_limit")
 		    );
-		    */
 
 		    // generate view
 			$view = View::create();
 			
 			$context = new Context();
-			$context->setGroups(['notteList']);
+			$context->setGroups(['Default', 'items' => ['notteList'] ]);
 			$view->setContext($context);
 			
 			$view->setData($nottes);

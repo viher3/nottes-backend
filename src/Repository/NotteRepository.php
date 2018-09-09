@@ -26,18 +26,8 @@ class NotteRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $dql =  "
-                SELECT 
-                d.id,
-                d.name,
-                d.type, 
-                d.tags, 
-                d.isEncrypted,
-                CASE WHEN (d.type = 'link') THEN d.content ELSE '' END AS content,
-                u.id AS creatorUserId,
-                u.username AS creatorUsername,
-                d.updatedAt
+                SELECT d
                 FROM App\Entity\Notte d 
-                LEFT JOIN d.creatorUser u 
                 WHERE d.creatorUser = :creatorUser 
                 ORDER BY d.id DESC
                 ";

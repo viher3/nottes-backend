@@ -4,20 +4,15 @@ FOS\UserBundle\Model\User:
         
         id:
             expose: true
-            groups: 
-                - notteList
 
         username:
             expose: true
-            groups: 
-                - notteList
+
+        nickname:
+            expose: true
 
         email:
             expose: true
-            groups: 
-                - notteList
         
         roles:
             expose: true
-            groups: 
-                - notteList
