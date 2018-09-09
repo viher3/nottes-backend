@@ -5,36 +5,48 @@ App\Entity\Notte:
         id:
             expose: true
             groups: 
+                - notteList
                 - notteDetail
 
         name:
             expose: true
             groups: 
+                - notteList
                 - notteDetail
 
         type:
             expose: true
             groups: 
+                - notteList
                 - notteDetail
 
         content:
             expose: true
             groups: 
+                - notteList
                 - notteDetail
+
+        document:
+            expose: true
+            groups: 
+                - notteList
 
         tags:
             expose: true
             groups: 
+                - notteList
                 - notteDetail
 
         creatorUser:
             expose: true
             groups: 
+                - notteList
                 - notteDetail
 
         isEncrypted:
             expose: true
             groups: 
+                - notteList
                 - notteDetail
 
         isDecrypted:
@@ -45,4 +57,5 @@ App\Entity\Notte:
         updatedAt:
             expose: true
             groups: 
+                - notteList
                 - notteDetail
