@@ -32,12 +32,25 @@
 	     *     response=200,
 	     *     description="Upload file/s"
 	     * )
+	     * @SWG\Response(
+	     *     response=422,
+	     *     description="Invalid or empty 'files' parameter"
+	     * )
 	     * @SWG\Tag(name="documents")
 	     */
 		public function index(Request $request)
 		{
 			// get files array
 			$files = $request->files->get('files');
+
+			if(empty($files))
+			{
+				return View::create(
+					['error' => 'Invalid or empty "files" parameter'], 
+					Response::HTTP_UNPROCESSABLE_ENTITY, 
+					[]
+				);
+			}
 
 			// FileUpload service
 			$fileUpload = new FileUpload(
