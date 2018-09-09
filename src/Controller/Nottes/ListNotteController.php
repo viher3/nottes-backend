@@ -2,17 +2,17 @@
 
 	namespace App\Controller\Nottes;
 
-	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	use Symfony\Component\Routing\Annotation\Route;
 	use Symfony\Component\HttpFoundation\Request;
-	use Symfony\Component\HttpFoundation\Response;
 
+	use FOS\RestBundle\Controller\FOSRestController;
+	use FOS\RestBundle\Context\Context;
 	use FOS\RestBundle\View\View;
-	use Nelmio\ApiDocBundle\Annotation\Model;
 	use Swagger\Annotations as SWG;
+
 	use App\Entity\Notte;
 
-	class ListNotteController extends Controller
+	class ListNotteController extends FOSRestController
 	{
 		/**
 	     * Get all user nottes
@@ -31,16 +31,30 @@
 
 			// get docs
 			$em = $this->getDoctrine()->getManager();
-			$nottes = $em->getRepository(Notte::class)->getList($user);
+			//$nottes = $em->getRepository(Notte::class)->getList($user);
+			$nottes = $em->getRepository(Notte::class)->findAll();
+
+			// TODO: knp_paginator breaks the serializer group
 
 			// pagination
+			/*
 			$paginator  = $this->get('knp_paginator');
 		    $nottes = $paginator->paginate(
 		        $nottes,
 		        $request->query->get("page"),
 		        $this->getParameter("pagination_page_limit")
 		    );
+		    */
 
-			return View::create($nottes, Response::HTTP_OK, []);
+		    // generate view
+			$view = View::create();
+			
+			$context = new Context();
+			$context->setGroups(['notteList']);
+			$view->setContext($context);
+			
+			$view->setData($nottes);
+
+			return $this->handleView($view);
 		}
 	}

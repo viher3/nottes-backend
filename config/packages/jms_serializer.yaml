@@ -8,6 +8,15 @@ jms_serializer:
             app:
                 namespace_prefix: "App"
                 path: "%kernel.root_dir%/../config/serializer"
+            
             FOSUB:
                 namespace_prefix: FOS\UserBundle
+                path: "%kernel.root_dir%/../config/serializer"
+
+            KnpPaginatorBundle:
+                namespace_prefix: Knp\Bundle\PaginatorBundle
+                path: "%kernel.root_dir%/../config/serializer"
+
+            KnpPager:
+                namespace_prefix: Knp\Component\Pager
                 path: "%kernel.root_dir%/../config/serializer"
