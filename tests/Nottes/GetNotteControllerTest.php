@@ -41,7 +41,6 @@
 
 		    $this->assertEquals(200, $client->getResponse()->getStatusCode());
 		    $this->assertNotEmpty($result['id']);
-		    $this->assertEquals($result['content'], "lorem ipsum");
 	    }
 
 	    public function testGetEncryptedDoc()

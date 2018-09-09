@@ -202,7 +202,7 @@ class Notte
     /**
      * @return bool
      */
-    public function isIsEncrypted()
+    public function isEncrypted()
     {
         return $this->isEncrypted;
     }
@@ -215,26 +215,6 @@ class Notte
     public function setIsEncrypted($isEncrypted)
     {
         $this->isEncrypted = $isEncrypted;
-
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIsDecrypted()
-    {
-        return $this->isDecrypted;
-    }
-
-    /**
-     * @param mixed $isDecrypted
-     *
-     * @return self
-     */
-    public function setIsDecrypted($isDecrypted)
-    {
-        $this->isDecrypted = $isDecrypted;
 
         return $this;
     }
@@ -329,5 +309,10 @@ class Notte
     public function setUpdatedValue()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    public function isDecrypted($isDecrypted)
+    {
+        $this->isDecrypted = $isDecrypted;
     }
 }

@@ -83,6 +83,7 @@
 				}
 			}
 
+			/*
 			if( $request->query->get("format") == "html" )
 			{
 				// convert BBCode to HTML
@@ -91,6 +92,7 @@
 				// add new content to the entity
 				$notte->setContent($content);
 			}
+			*/
 
 			return View::create($notte, Response::HTTP_OK, []);
 		}
