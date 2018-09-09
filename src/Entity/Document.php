@@ -51,13 +51,6 @@ class Document
     private $mimetype;
 
     /**
-     * @var string|null
-     *
-     * @ORM\Column(name="tags", type="string", length=255, nullable=true)
-     */
-    private $tags;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -175,26 +168,6 @@ class Document
     }
 
     /**
-     * @return string|null
-     */
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    /**
-     * @param string|null $tags
-     *
-     * @return self
-     */
-    public function setTags($tags)
-    {
-        $this->tags = $tags;
-
-        return $this;
-    }
-
-    /**
      * @return \DateTime
      */
     public function getCreatedAt()
@@ -232,5 +205,11 @@ class Document
         $this->notte = $notte;
 
         return $this;
+    }
+    
+    public function setCreatedValue()
+    {
+        $currDatetime = new \DateTime();
+        $this->createdAt = $currDatetime;
     }
 }

@@ -34,14 +34,8 @@ App\Entity\Document:
             type: string
             length: 255
 
-        tags:
-            type: string
-            length: 255
-            nullable: true
-
         createdAt:
             type: datetime
 
     lifecycleCallbacks: 
         prePersist: [ setCreatedValue ]
-        preUpdate: [ setUpdatedValue ]

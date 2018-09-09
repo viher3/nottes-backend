@@ -1,6 +1,6 @@
 <?php
 
-	namespace App\Controller\Uploads;
+	namespace App\Controller\Documents;
 
 	use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 	use Symfony\Component\Routing\Annotation\Route;
@@ -13,18 +13,18 @@
 	use App\Entity\Notte;
 	use App\Services\Upload\FileUpload;
 
-	class FileUploadController extends Controller
+	class DocumentUploadController extends Controller
 	{
 		/**
 	     * Upload an image
 	     *
-	     * @Route("/api/upload", name="upload_image", methods={"POST"}).
+	     * @Route("/api/documents", name="upload_document", methods={"POST"}).
 	     *
 	     * @SWG\Response(
 	     *     response=200,
 	     *     description="Upload an image"
 	     * )
-	     * @SWG\Tag(name="uploads")
+	     * @SWG\Tag(name="documents")
 	     */
 		public function index(Request $request)
 		{
@@ -32,7 +32,12 @@
 			$files = $request->files->get('files');
 
 			// FileUpload service
-			$fileUpload = new FileUpload($files);
+			$fileUpload = new FileUpload(
+								$files, 
+								$this->getDoctrine()->getManager(),
+								$this->getParameter("uploadDir"),
+								$this->get('jwt.user.manager')->getUser()
+							);
 			$result = $fileUpload->uploadFiles();
 
 			return View::create($result, Response::HTTP_OK, []);

@@ -38,9 +38,9 @@ class Notte
     private $type;
 
     /**
-     * @var string
+     * @var string|null
      *
-     * @ORM\Column(name="content", type="text")
+     * @ORM\Column(name="content", type="text", nullable=true)
      */
     private $content;
 

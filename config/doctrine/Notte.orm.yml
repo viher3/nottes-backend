@@ -25,6 +25,7 @@ App\Entity\Notte:
             length: 5
         content:
             type: text
+            nullable: true
         tags:
             type: string
             length: 255
