@@ -98,38 +98,14 @@
 
 		private function createDocumentEntity(UploadedFile $file, $filepath, $shortFilepath, $tags="")
 		{
-			try
-			{
-				$filename = $file->getClientOriginalName();
-
-				// create notte entity
-				$notte = new Notte();
-				$notte->setName($filename);
-				$notte->setType("file");
-				$notte->setCreatorUser($this->user);
-
-				if( ! empty($tags) )
-				{
-					$notte->setTags($tags);
-				}
-
-				// save notte entity
-				$this->em->persist($notte);
-				$this->em->flush();
-			}
-			catch(\Exception $e)
-			{
-				// TODO: log error
-				throw $e;
-			}
-
+			$filename = $file->getClientOriginalName();
+			
 			// create document entity
 			try
 			{
 				$document = new Document();
 				$document->setName($filename);
 				$document->setPath($shortFilepath);
-				$document->setNotte($notte);
 
 				// get file size
 				$size = filesize($filepath);
@@ -141,6 +117,30 @@
 
 				// save document entity
 				$this->em->persist($document);
+				$this->em->flush();
+			}
+			catch(\Exception $e)
+			{
+				// TODO: log error
+				throw $e;
+			}
+
+			try
+			{
+				// create notte entity
+				$notte = new Notte();
+				$notte->setDocument($document);
+				$notte->setName($filename);
+				$notte->setType("file");
+				$notte->setCreatorUser($this->user);
+
+				if( ! empty($tags) )
+				{
+					$notte->setTags($tags);
+				}
+
+				// save notte entity
+				$this->em->persist($notte);
 				$this->em->flush();
 			}
 			catch(\Exception $e)

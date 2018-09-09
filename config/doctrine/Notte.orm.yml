@@ -12,6 +12,14 @@ App\Entity\Notte:
             name: creator_user_id
             referencedColumnName: id
 
+        document:
+          targetEntity: App\Entity\Document
+          joinColumn:
+            name: document_id
+            referencedColumnName: id
+            onDelete: CASCADE
+            nullable: true
+
     id:
         id:
             type: integer

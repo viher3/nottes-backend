@@ -4,14 +4,6 @@ App\Entity\Document:
     table: documents
     repositoryClass: App\Repository\DocumentRepository
 
-    manyToOne:
-
-        notte:
-          targetEntity: App\Entity\Notte
-          joinColumn:
-            name: notte_id
-            referencedColumnName: id
-
     id:
         id:
             type: integer
