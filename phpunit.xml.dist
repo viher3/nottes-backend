@@ -22,11 +22,6 @@
         <env name="PAGINATION_PAGE_LIMIT" value="20" />
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak" />
         <!-- define your env variables for the test env here -->
-
-        <!-- ###+ aws/aws-sdk-php-symfony ### -->
-        <env name="AWS_KEY" value="not-a-real-key"/>
-        <env name="AWS_SECRET" value="@@not-a-real-secret"/>
-        <!-- ###- aws/aws-sdk-php-symfony ### -->
     </php>
 
     <testsuites>
