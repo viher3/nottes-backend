@@ -3,17 +3,26 @@
 	namespace App\Tests\Services\Upload;
 
 	use PHPUnit\Framework\TestCase;
+	use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+
+	use App\Entity\User;
 	use App\Services\Upload\FileUpload;
 	use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-	class FileUploadTest extends TestCase
+	class FileUploadTest extends KernelTestCase
 	{
 		protected $files;
-
 		protected $uploadDir;
+		protected $em;
+		protected $user;
 
 		public function setUp()
 	    {
+	    	$kernel = self::bootKernel();
+
+	        $this->em = $kernel->getContainer()->get('doctrine')->getManager();
+	        $this->user = $this->em->getRepository(User::class)->findOneBy(array('username' => 'phpunit'));
+
 	    	// get upload path
 			$currDir = __DIR__;
 			$uploadDirArray = explode("tests", $currDir);
@@ -38,7 +47,9 @@
 			// instance FileUpload class
 			$fileUpload = new FileUpload(
 								$this->files, 
-								$this->uploadDir
+								$this->em, 
+								$this->uploadDir,
+								$this->user
 							);
 
 			$result = $fileUpload->uploadFiles();
