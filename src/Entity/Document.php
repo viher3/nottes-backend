@@ -58,16 +58,6 @@ class Document
     private $createdAt;
 
     /**
-     * @var \App\Entity\Notte
-     *
-     * @ORM\ManyToOne(targetEntity="App\Entity\Notte")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="notte_id", referencedColumnName="id")
-     * })
-     */
-    private $notte;
-
-    /**
      * @return int
      */
     public function getId()

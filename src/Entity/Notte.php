@@ -83,6 +83,16 @@ class Notte
      */
     private $creatorUser;
 
+    /**
+     * @var \App\Entity\Document
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Document")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="document_id", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+     * })
+     */
+    private $document;
+
     public function __construct()
     {
         $this->type = "doc";
@@ -150,7 +160,7 @@ class Notte
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getContent()
     {
@@ -158,7 +168,7 @@ class Notte
     }
 
     /**
-     * @param string $content
+     * @param string|null $content
      *
      * @return self
      */
@@ -192,7 +202,7 @@ class Notte
     /**
      * @return bool
      */
-    public function isEncrypted()
+    public function isIsEncrypted()
     {
         return $this->isEncrypted;
     }
@@ -205,6 +215,26 @@ class Notte
     public function setIsEncrypted($isEncrypted)
     {
         $this->isEncrypted = $isEncrypted;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIsDecrypted()
+    {
+        return $this->isDecrypted;
+    }
+
+    /**
+     * @param mixed $isDecrypted
+     *
+     * @return self
+     */
+    public function setIsDecrypted($isDecrypted)
+    {
+        $this->isDecrypted = $isDecrypted;
 
         return $this;
     }
@@ -269,7 +299,26 @@ class Notte
         return $this;
     }
 
-    
+    /**
+     * @return \App\Entity\Document
+     */
+    public function getDocument()
+    {
+        return $this->document;
+    }
+
+    /**
+     * @param \App\Entity\Document $document
+     *
+     * @return self
+     */
+    public function setDocument(\App\Entity\Document $document)
+    {
+        $this->document = $document;
+
+        return $this;
+    }
+
     public function setCreatedValue()
     {
         $currDatetime = new \DateTime();
@@ -281,10 +330,4 @@ class Notte
     {
         $this->updatedAt = new \DateTime();
     }
-
-    public function isDecrypted($isDecrypted)
-    {
-        $this->isDecrypted = $isDecrypted;
-    }
-    
 }
