@@ -76,62 +76,78 @@
 			{
 				// move file to the upload dir
 				$file->move($this->uploadDir, $fileHash);
-
-				// get short file path
-				$filePathArray = explode("uploads/", $filepath);
-				$shortFilepath = $filePathArray[1];
-
-				// create entities
-				$this->createDocumentEntity($file, $filepath, $shortFilepath);
-
-				return [
-						'filepath' => $filepath,
-						'fileInfo' => $file
-					];
 			}
 			catch(\Exception $e)
 			{
 				// TODO: log error
 				throw $e;
 			}
+
+			// get short file path
+			$filePathArray = explode("uploads/", $filepath);
+			$shortFilepath = $filePathArray[1];
+
+			// create entities
+			$this->createDocumentEntity($file, $filepath, $shortFilepath);
+
+			return [
+				'filepath' => $filepath,
+				'fileInfo' => $file
+			];
 		}
 
 		private function createDocumentEntity(UploadedFile $file, $filepath, $shortFilepath, $tags="")
 		{
-			$filename = $file->getClientOriginalName();
-
-			// create notte entity
-			$notte = new Notte();
-			$notte->setName($filename);
-			$notte->setType("file");
-			$notte->setCreatorUser($this->user);
-
-			if( ! empty($tags) )
+			try
 			{
-				$notte->setTags($tags);
+				$filename = $file->getClientOriginalName();
+
+				// create notte entity
+				$notte = new Notte();
+				$notte->setName($filename);
+				$notte->setType("file");
+				$notte->setCreatorUser($this->user);
+
+				if( ! empty($tags) )
+				{
+					$notte->setTags($tags);
+				}
+
+				// save notte entity
+				$this->em->persist($notte);
+				$this->em->flush();
+			}
+			catch(\Exception $e)
+			{
+				// TODO: log error
+				throw $e;
 			}
 
-			// save notte entity
-			$this->em->persist($notte);
-			$this->em->flush();
-
 			// create document entity
-			$document = new Document();
-			$document->setName($filename);
-			$document->setPath($shortFilepath);
-			$document->setNotte($notte);
+			try
+			{
+				$document = new Document();
+				$document->setName($filename);
+				$document->setPath($shortFilepath);
+				$document->setNotte($notte);
 
-			// get file size
-			$size = filesize($filepath);
-			$document->setSize($size);
+				// get file size
+				$size = filesize($filepath);
+				$document->setSize($size);
 
-			// get mimetype
-			$mimetype = mime_content_type($filepath);
-			$document->setMimetype($mimetype);
+				// get mimetype
+				$mimetype = mime_content_type($filepath);
+				$document->setMimetype($mimetype);
 
-			// save document entity
-			$this->em->persist($document);
-			$this->em->flush();
+				// save document entity
+				$this->em->persist($document);
+				$this->em->flush();
+			}
+			catch(\Exception $e)
+			{
+				// TODO: log error
+				throw $e;
+			}
 		}
 
 		/**
