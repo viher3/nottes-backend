@@ -16,13 +16,21 @@
 	class DocumentUploadController extends Controller
 	{
 		/**
-	     * Upload an image
+	     * Upload file/s
 	     *
-	     * @Route("/api/documents", name="upload_document", methods={"POST"}).
+	     * @Route("/api/document", name="upload_document", methods={"POST"}).
+	     *
+	     * @SWG\Parameter(
+         *     name="files",
+         *     in="query",
+         *     type="string",
+         *     required=true,
+         *     description="Array with File objects to upload"
+         * )
 	     *
 	     * @SWG\Response(
 	     *     response=200,
-	     *     description="Upload an image"
+	     *     description="Upload file/s"
 	     * )
 	     * @SWG\Tag(name="documents")
 	     */
