@@ -94,6 +94,7 @@
 
       $notte = new Notte();
       $notte->setName("test_doc");
+      $notte->setType("file");
       $notte->setCreatorUser($user);
       $notte->setDocument($document);
 
