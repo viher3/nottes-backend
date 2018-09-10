@@ -8,6 +8,18 @@
 
 	class DeleteNotteControllerTest extends WebTestCase
 	{
+		private $notteId;
+
+		public function setUp()
+	    {
+	    	$kernel = self::bootKernel();
+	    	$this->em = $kernel->getContainer()->get('doctrine')->getManager();
+
+	    	// get test document id
+	    	$notte = $this->em->getRepository(Notte::class)->findOneBy(['name' => 'notte-to-delete']);
+	    	$this->notteId = $notte->getId();
+	    }
+
 	    public function testDelete()
 	    {
 	        $client	= static::createClient();
@@ -15,7 +27,7 @@
 
 	        $client->request(
 		      "DELETE",
-		      "/api/notte/1"
+		      "/api/notte/" . $this->notteId
 		    );
 
 		    $result = json_decode( $client->getResponse()->getContent(), true );

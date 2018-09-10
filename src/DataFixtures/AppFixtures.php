@@ -30,6 +30,7 @@
       $this->createTestNote($manager, $user, "lorem ipsum", "lorem ipsum", "lorem,ipsum");
       $this->createTestNote($manager, $user2, "lorem ipsum user 2", "lorem ipsum user 2", "lorem,ipsum");
       $this->createTestNote($manager, $user, "encrypted", "encrypted", "encrypted,doc", true, "123456");
+      $this->createTestNote($manager, $user, "notte-to-delete", "notte-to-delete", "notte-to-delete,doc", true, "123456");
 
       $this->createNoteWithDocument($manager, $user);
     }
