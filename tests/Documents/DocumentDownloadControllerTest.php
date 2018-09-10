@@ -3,8 +3,9 @@
 	namespace App\Tests\Documents;
 
 	use App\Entity\Notte;
-	use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 	use App\Tests\AuthenticationHelper;
+	use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+	use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 	class DocumentDownloadControllerTest extends WebTestCase
 	{
@@ -35,5 +36,31 @@
 			
 		    $this->assertEquals(200, $client->getResponse()->getStatusCode());
 		    $this->assertNotEmpty($result->getFile());
+	    }
+
+	    public function testNotFoundEntity()
+	    {
+	    	$client	= static::createClient();
+	        $client	= ( new AuthenticationHelper() )->getAuthToken($client);
+
+	        $client->request(
+		      "GET",
+		      "/api/document/9999"
+		    );
+
+		    $this->assertEquals(404, $client->getResponse()->getStatusCode());
+	    }
+
+	    public function testForbiddenAccess()
+	    {
+	    	$client	= static::createClient();
+	        $client	= ( new AuthenticationHelper() )->getAuthToken($client, "phpunit2");
+
+	        $client->request(
+		      "GET",
+		      "/api/document/" . $this->documentId
+		    );
+
+		    $this->assertEquals(403, $client->getResponse()->getStatusCode());
 	    }
 	}
