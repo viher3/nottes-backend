@@ -54,4 +54,20 @@
 		    $this->assertNotEmpty($result[0]['filepath']);
 		    $this->assertNotEmpty($result[1]['filepath']);
 	    }
+
+	    public function testEmptyFilesParam()
+	    {
+	    	$client	= static::createClient();
+	        $client	= ( new AuthenticationHelper() )->getAuthToken($client);
+
+	        $client->request(
+		      "POST",
+		      "/api/document",
+		      []
+		    );
+
+		    $result = json_decode( $client->getResponse()->getContent(), true );
+
+		    $this->assertEquals(422, $client->getResponse()->getStatusCode());
+	    }
 	}
