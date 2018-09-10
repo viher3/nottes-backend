@@ -10,3 +10,9 @@ App\Entity\Document:
 
         path:
           expose: true
+
+        mimetype:
+          expose: true
+
+        creatorUser:
+          expose: true
