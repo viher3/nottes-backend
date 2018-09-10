@@ -4,15 +4,9 @@ App\Entity\Document:
         
         id:
           expose: true
-          groups: 
-            - notteList
 
         name:
           expose: true
-          groups: 
-            - notteList
 
         path:
           expose: true
-          groups: 
-            - notteList
