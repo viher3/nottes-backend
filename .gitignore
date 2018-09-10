@@ -32,3 +32,4 @@
 ### other files ###
 var/log/nginx/error.log
 public/uploads/*
+!public/uploads/.gitkeep
