@@ -6,6 +6,9 @@
 	use Symfony\Component\Routing\Annotation\Route;
 	use Symfony\Component\HttpFoundation\Request;
 	use Symfony\Component\HttpFoundation\Response;
+	use Symfony\Component\HttpFoundation\BinaryFileResponse;
+	use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+	use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 	use FOS\RestBundle\View\View;
 	use Nelmio\ApiDocBundle\Annotation\Model;
@@ -28,8 +31,48 @@
 	     */
 		public function index(Document $entity)
 		{
-			$result = [];
+			if(empty($entity))
+			{
+				throw new NotFoundHttpException("Entity not found");
+			}
 
-			return View::create($result, Response::HTTP_OK, []);
+			// check entity owner
+			$currentUser = $this->get('jwt.user.manager')->getUser();
+
+			if($entity->getCreatorUser()->getId() != $currentUser->getId())
+			{
+				return View::create(['error' => 'Forbidden access'], Response::HTTP_FORBIDDEN, []);
+			}
+
+			// get file
+			$filename = $entity->getName();
+			$filepath = $entity->getPath();
+			$fullFilepath = $this->getParameter("uploadDir") . $filepath;
+
+			if( ! file_exists($fullFilepath) )
+			{
+				throw new NotFoundHttpException("File not found");
+			}
+
+			// create the response object
+			$response = new BinaryFileResponse($fullFilepath);
+
+			// set file MimeType
+			if( ! empty($entity->getMimetype()) ) 
+			{
+	           	$response->headers->set('Content-Type', $entity->getMimetype());
+	       	}
+	       	else 
+	       	{
+	           	$response->headers->set('Content-Type', 'text/plain');
+	       	}
+
+	       	// Set content disposition inline of the file
+	       	$response->setContentDisposition(
+	           ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+	           $filename
+	       	);
+
+			return $response;
 		}
 	}
