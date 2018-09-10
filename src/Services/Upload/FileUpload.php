@@ -106,6 +106,7 @@
 				$document = new Document();
 				$document->setName($filename);
 				$document->setPath($shortFilepath);
+				$document->setCreatorUser($this->user);
 
 				// get file size
 				$size = filesize($filepath);

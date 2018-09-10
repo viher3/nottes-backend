@@ -4,6 +4,14 @@ App\Entity\Document:
     table: documents
     repositoryClass: App\Repository\DocumentRepository
 
+    manyToOne:
+
+        creatorUser:
+          targetEntity: App\Entity\User
+          joinColumn:
+            name: creator_user_id
+            referencedColumnName: id
+
     id:
         id:
             type: integer

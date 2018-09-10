@@ -58,6 +58,16 @@ class Document
     private $createdAt;
 
     /**
+     * @var \App\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="creator_user_id", referencedColumnName="id")
+     * })
+     */
+    private $creatorUser;
+
+    /**
      * @return int
      */
     public function getId()
@@ -201,5 +211,25 @@ class Document
     {
         $currDatetime = new \DateTime();
         $this->createdAt = $currDatetime;
+    }
+
+    /**
+     * @return \App\Entity\User
+     */
+    public function getCreatorUser()
+    {
+        return $this->creatorUser;
+    }
+
+    /**
+     * @param \App\Entity\User $creatorUser
+     *
+     * @return self
+     */
+    public function setCreatorUser(\App\Entity\User $creatorUser)
+    {
+        $this->creatorUser = $creatorUser;
+
+        return $this;
     }
 }
