@@ -8,6 +8,7 @@
   use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 
   use App\Entity\Notte;
+  use App\Entity\Document;
   use App\Services\Encryption\Encryption;
 
   class AppFixtures extends Fixture implements ContainerAwareInterface
@@ -29,6 +30,8 @@
       $this->createTestNote($manager, $user, "lorem ipsum", "lorem ipsum", "lorem,ipsum");
       $this->createTestNote($manager, $user2, "lorem ipsum user 2", "lorem ipsum user 2", "lorem,ipsum");
       $this->createTestNote($manager, $user, "encrypted", "encrypted", "encrypted,doc", true, "123456");
+
+      $this->createNoteWithDocument($manager, $user);
     }
 
     private function createTestUser(ObjectManager $manager, $userManager, $username)
@@ -74,6 +77,29 @@
       $manager->flush();
 
       return $notte;
+    }
+
+    private function createNoteWithDocument($manager, $user)
+    {
+      $document = new Document();
+      $document->setName("test.jpeg");
+      $document->setPath(".gitkeep");
+      $document->setSize(0);
+      $document->setMimetype("text/plain");
+      $document->setCreatorUser($user);
+
+      $manager->persist($document);
+      $manager->flush();
+
+      $notte = new Notte();
+      $notte->setName("test_doc");
+      $notte->setCreatorUser($user);
+      $notte->setDocument($document);
+
+      $manager->persist($notte);
+      $manager->flush();
+
+      return $document;
     }
 
   }
