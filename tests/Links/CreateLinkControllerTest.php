@@ -58,7 +58,7 @@
 		      "POST",
 		      "/api/notte",
 		      [
-		        "name" => new \stdClass(),
+		        "name" => ['test'],
 		        "content" => "phpunit-test",
 		        "tags" => "phpunit,test"
 		      ]
