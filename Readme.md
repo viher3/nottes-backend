@@ -30,11 +30,11 @@ Create database schema
 
     php bin/console doctrine:schema:create
 
-Create new admin user
+Create a new admin user
 
     php bin/console fos:user:create --super-admin
 
-You can run backend in your favorite web server or run with the built-in web server
+You can run backend in your favorite web server or run it with the built-in web server
 
     php bin/console server:start
 
