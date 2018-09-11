@@ -8,7 +8,7 @@ Nottes backend
 
 Nottes is a web app where you can save text notes, links and files. It's easy to use and Open Source. 
 
-Backend is built with Symfony 4 and the Front-End with Angular 5.
+Backend is built with Symfony 4 and the Frontend with Angular 5.
 
 ## Screenshots
 
