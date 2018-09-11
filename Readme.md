@@ -7,8 +7,8 @@ Nottes backend
 
 ## Screenshots
 
-![dashboard](https://raw.githubusercontent.com/viher3/nottes-backend/master/screenshots/nottes_1.png|width=100 )
-![creating new notte](https://raw.githubusercontent.com/viher3/nottes-backend/master/screenshots/nottes_2.png|width=100)
+![dashboard](https://raw.githubusercontent.com/viher3/nottes-backend/master/screenshots/nottes_1.png | width=100 )
+![creating new notte](https://raw.githubusercontent.com/viher3/nottes-backend/master/screenshots/nottes_2.png | width=100)
 
 ## Features
 
