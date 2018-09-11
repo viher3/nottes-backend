@@ -12,10 +12,10 @@ Backend is built with Symfony 4 and the Frontend with Angular 5.
 
 ## Screenshots
 
-<img src="https://raw.githubusercontent.com/viher3/nottes-backend/master/screenshots/nottes_1.png" width="150">
-<img src="https://raw.githubusercontent.com/viher3/nottes-backend/master/screenshots/nottes_2.png" width="150">
-<img src="https://raw.githubusercontent.com/viher3/nottes-backend/master/screenshots/nottes_3.png" width="150">
-<img src="https://raw.githubusercontent.com/viher3/nottes-backend/master/screenshots/nottes_4.png" width="150">
+<img src="https://raw.githubusercontent.com/viher3/nottes-frontend/master/screenshots/nottes_1.png" width="150">
+<img src="https://raw.githubusercontent.com/viher3/nottes-frontend/master/screenshots/nottes_2.png" width="150">
+<img src="https://raw.githubusercontent.com/viher3/nottes-frontend/master/screenshots/nottes_3.png" width="150">
+<img src="https://raw.githubusercontent.com/viher3/nottes-frontend/master/screenshots/nottes_4.png" width="150">
 
 ## Features
 
