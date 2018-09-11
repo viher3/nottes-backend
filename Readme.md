@@ -60,7 +60,7 @@ Now the backend is running
 
     https://localhost:8083
 
-## API documentation
+## API REST documentation
 
 You can view the API REST documentation here:
 
