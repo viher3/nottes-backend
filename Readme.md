@@ -5,6 +5,9 @@ Nottes backend
 [![Build Status](https://travis-ci.org/viher3/nottes-backend.svg?branch=master)](https://travis-ci.org/viher3/nottes-backend)
 [![Coverage Status](https://coveralls.io/repos/github/viher3/nottes-backend/badge.svg?branch=master)](https://coveralls.io/github/viher3/nottes-backend?branch=master)
 
+Nottes is a web app where you can save text notes, links and files. It's easy to use and Open Source.
+Backend is built with Symfony 4 and the Front-End with Angular 5.
+
 ## Screenshots
 
 <img src="https://raw.githubusercontent.com/viher3/nottes-backend/master/screenshots/nottes_1.png" width="150">
@@ -72,3 +75,7 @@ Now the backend is running
 You can view the API REST documentation here:
 
 http://localhost:8000/api/doc
+
+## LICENSE
+
+Nottes is released under the MIT Licence. See the LICENSE file for details.
