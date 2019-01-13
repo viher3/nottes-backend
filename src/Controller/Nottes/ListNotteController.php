@@ -38,7 +38,7 @@
 			$paginator = $this->get('knp_paginator');
 		    $nottes = $paginator->paginate(
 		        $nottes,
-		        $request->query->get("page"),
+		        ($request->query->get("page")) ?? 1,
 		        $this->getParameter("pagination_page_limit")
 		    );
 
