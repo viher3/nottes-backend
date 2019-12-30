@@ -57,6 +57,13 @@ class Notte
      * @ORM\Column(name="is_encrypted", type="boolean")
      */
     private $isEncrypted;
+
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_decrypted", type="boolean")
+     */
     private $isDecrypted = false;
 
     /**
