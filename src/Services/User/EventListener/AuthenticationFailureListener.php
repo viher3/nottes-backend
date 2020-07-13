@@ -24,7 +24,7 @@
 		 * @param RequestStack $requestStack
 		 */
 		public function __construct(
-			RequestStack $requestStack, 
+			RequestStack $requestStack,
 			EntityManagerInterface $em,
 			SaveUserInfoToLog $saveUserInfo
 		)
@@ -43,8 +43,8 @@
 		    $request = $this->requestStack->getCurrentRequest();
 		    $email = $request->request->get("_username");
 
-		    $this->saveUserInfo->saveUserInfo($email, true);
-		    
+		    $this->saveUserInfo->saveUserInfo($email, false);
+
 		    // set response
 		    $data = [
 		        'status'  => '401 Unauthorized',
