@@ -11,6 +11,8 @@ class Folder extends AggregateRoot
 
     private ?string $description;
 
+    private ?Folder $parent;
+
     private \DateTimeInterface $createdAt;
 
     private \DateTimeInterface $updatedAt;
@@ -22,10 +24,11 @@ class Folder extends AggregateRoot
      * @param string $name
      * @param string|null $description
      */
-    public function __construct(string $id, string $name, ?string $description)
+    public function __construct(string $id, string $name, ?Folder $parent, ?string $description)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->parent = $parent;
         $this->description = $description;
         $this->createdAt = $this->updatedAt = new \DateTime();
     }
@@ -76,5 +79,13 @@ class Folder extends AggregateRoot
     public function getDeletedAt(): \DateTimeInterface
     {
         return $this->deletedAt;
+    }
+
+    /**
+     * @return Folder|null
+     */
+    public function getParent(): ?Folder
+    {
+        return $this->parent;
     }
 }
