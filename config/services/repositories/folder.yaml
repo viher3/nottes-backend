@@ -1,3 +1,3 @@
 services:
 
-#  Nottes\Survey\Domain\Survey\SurveyRepository: '@Nottes\Survey\Infrastructure\Persistence\DoctrineSurveyRepository'
+  App\Nottes\Domain\Folder\FolderRepository: '@App\Nottes\Infrastructure\Folder\Persistence\DoctrineFolderRepository'

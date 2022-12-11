@@ -15,6 +15,11 @@ class DoctrineFolderRepository extends DoctrineRepository implements FolderRepos
         return $this->getRepository()->find($id);
     }
 
+    public function save(Folder $folder) : void
+    {
+        $this->persist($folder);
+    }
+
     /**
      * @return EntityRepository
      */

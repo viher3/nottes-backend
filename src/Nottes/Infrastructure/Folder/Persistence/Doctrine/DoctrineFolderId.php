@@ -4,24 +4,12 @@ declare(strict_types=1);
 
 namespace App\Nottes\Infrastructure\Folder\Persistence\Doctrine;
 
-use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Symfony\Bridge\Doctrine\Types\AbstractUidType;
+use App\Nottes\Domain\Folder\FolderId;
+use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineUuidType;
 
-final class DoctrineFolderId extends AbstractUidType
+final class DoctrineFolderId extends DoctrineUuidType
 {
-    private const MY_TYPE = 'FolderId';
-
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
-    {
-        return parent::convertToDatabaseValue($value->value(), $platform);
-    }
-
-    public function getName(): string
-    {
-        return self::MY_TYPE;
-    }
-
-    protected function getUidClass(): string
+    protected function getFQCN(): string
     {
         return FolderId::class;
     }

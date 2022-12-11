@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Nottes\Domain\Folder;
+
 use App\Shared\Domain\Aggregate\AggregateRoot;
 
 class Folder extends AggregateRoot
 {
-    private string $id;
+    private FolderId $id;
 
     private string $name;
 
@@ -20,11 +21,12 @@ class Folder extends AggregateRoot
     private \DateTimeInterface $deletedAt;
 
     /**
-     * @param string $id
+     * @param FolderId $id
      * @param string $name
+     * @param Folder|null $parent
      * @param string|null $description
      */
-    public function __construct(string $id, string $name, ?Folder $parent, ?string $description)
+    public function __construct(FolderId $id, string $name, ?Folder $parent, ?string $description)
     {
         $this->id = $id;
         $this->name = $name;
@@ -34,9 +36,9 @@ class Folder extends AggregateRoot
     }
 
     /**
-     * @return string
+     * @return FolderId
      */
-    public function getId(): string
+    public function getId(): FolderId
     {
         return $this->id;
     }

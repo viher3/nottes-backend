@@ -5,6 +5,34 @@ App\Nottes\Domain\Folder\Folder:
   attributes: []
   collectionOperations:
 
+    create_folder:
+      method: 'POST'
+      path: '/folder'
+      schemes: [ 'https', 'http' ]
+      controller: Nottes\Apps\Api\Controller\Folder\CreateFolderController
+      defaults:
+        _api_receive: false
+      openapi_context:
+        summary: 'Create Folder'
+        consumes:
+          - application/json
+
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name: { type: string }
+                  description: { type: string }
+                  parent: {type: string }
+
+        responses:
+          200:
+            description: 'Survey Fulfillment'
+          400:
+            description: 'Incorrect Parameters'
+
 #    get_folder_list:
 #      method: 'GET'
 #      path: '/folders'
@@ -20,7 +48,7 @@ App\Nottes\Domain\Folder\Folder:
 #          200:
 #            description: 'Surveys list'
 
-  itemOperations:
+  itemOperations: []
 
 #    get_survey_detail:
 #      method: 'GET'
