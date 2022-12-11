@@ -40,16 +40,6 @@ class Uuid
         return $this->value() === $other->value();
     }
 
-//    public static function fromString(string $value) : self
-//    {
-//        return new self($value);
-//    }
-//
-//    public static function toBinary() : ?string
-//    {
-//        return self::random()->__toString();
-//    }
-
     public function __toString()
     {
         return $this->value();
