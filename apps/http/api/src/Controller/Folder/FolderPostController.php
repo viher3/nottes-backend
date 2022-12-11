@@ -2,15 +2,15 @@
 
 namespace Nottes\Apps\Api\Controller\Folder;
 
-use App\Nottes\Application\Folder\Creator\FolderCreator;
-use App\Nottes\Application\Folder\Creator\FolderCreatorRequest;
 use Assert\Assertion;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use App\Nottes\Application\Folder\Creator\FolderCreator;
+use App\Nottes\Application\Folder\Creator\FolderCreatorRequest;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class CreateFolderController extends AbstractController
+class FolderPostController extends AbstractController
 {
     private FolderCreator $folderCreator;
 
@@ -45,6 +45,5 @@ class CreateFolderController extends AbstractController
                 'error' => $e->getMessage()
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-
     }
 }

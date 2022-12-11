@@ -9,7 +9,7 @@ App\Nottes\Domain\Folder\Folder:
       method: 'POST'
       path: '/folder'
       schemes: [ 'https', 'http' ]
-      controller: Nottes\Apps\Api\Controller\Folder\CreateFolderController
+      controller: Nottes\Apps\Api\Controller\Folder\FolderPostController
       defaults:
         _api_receive: false
       openapi_context:
@@ -37,7 +37,7 @@ App\Nottes\Domain\Folder\Folder:
 #      method: 'GET'
 #      path: '/folders'
 #      schemes: [ 'https', 'http' ]
-#      controller: Nottes\Apps\Api\Controller\Survey\GetSurveyListController
+#      controller: Nottes\Apps\Api\Controller\Folder\FolderListController
 #      defaults:
 #        _api_receive: false
 #      swagger_context:
@@ -50,19 +50,19 @@ App\Nottes\Domain\Folder\Folder:
 
   itemOperations: []
 
-#    get_survey_detail:
+#    get_folder_detail:
 #      method: 'GET'
-#      path: '/survey/{id}'
+#      path: '/folder/{id}'
 #      schemes: [ 'https', 'http' ]
-#      controller: Nottes\Apps\Api\Controller\Survey\GetSurveyDetailByIdController
+#      controller: Nottes\Apps\Api\Controller\Folder\FolderGetController
 #      defaults:
 #        _api_receive: false
 #      swagger_context:
-#        summary: 'Get Survey detail by id'
+#        summary: 'Get folder detail by id'
 #        description: ''
 #        parameters: []
 #        responses:
 #          200:
-#            description: 'Survey detail'
+#            description: 'Folder detail'
 #          400:
 #            description: 'Incorrect Parameters'

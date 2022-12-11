@@ -10,7 +10,13 @@ use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
 
 class DoctrineFolderRepository extends DoctrineRepository implements FolderRepository
 {
-    public function search(FolderId $id): ?Folder
+    public function search() : array
+    {
+        $qb = $this->getRepository()->createQueryBuilder('q');
+        return $qb->getQuery()->getResult();
+    }
+
+    public function find(FolderId $id): ?Folder
     {
         return $this->getRepository()->find($id);
     }
