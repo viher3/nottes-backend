@@ -1,0 +1,14 @@
+api_platform:
+    enable_re_doc: false
+    title: 'Nottes API'
+    version: '0.0.1'
+    mapping:
+        paths:
+            - '%kernel.project_dir%/config/api_platform'
+    patch_formats:
+        json: ['application/merge-patch+json']
+    swagger:
+        versions: [3]
+    formats:
+        json: [ 'application/json' ]
+        html: [ 'text/html' ]

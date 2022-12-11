@@ -1,35 +1,4 @@
-/.web-server-pid
-/app/config/parameters.yml
-/build/
-/phpunit.xml
-/var/jwt/*
-!/var/jwt/public_test.pem
-!/var/jwt/private_test.pem
-!/var/cache
-/var/cache/*
-!var/cache/.gitkeep
-!/var/logs
-/var/logs/*
-!var/logs/.gitkeep
-!/var/sessions
-/var/sessions/*
-!var/sessions/.gitkeep
-!var/SymfonyRequirements.php
-/vendor/
-/web/bundles/
-
-###> symfony/web-server-bundle ###
-.web-server-pid
-###< symfony/web-server-bundle ###
-
-###> symfony/phpunit-bridge ###
-.phpunit
-/phpunit.xml
-###< symfony/phpunit-bridge ###
-
-.env
-
-### other files ###
-var/log/nginx/error.log
-public/uploads/*
-!public/uploads/.gitkeep
+.idea/
+vendor/
+var/
+public/bundles

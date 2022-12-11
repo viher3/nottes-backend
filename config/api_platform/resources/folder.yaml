@@ -1,0 +1,40 @@
+App\Nottes\Domain\Folder\Folder:
+  shortName: 'Folder'
+  description: 'Resource'
+  iri: 'https://schema.org/Folder'
+  attributes: []
+  collectionOperations:
+
+#    get_folder_list:
+#      method: 'GET'
+#      path: '/folders'
+#      schemes: [ 'https', 'http' ]
+#      controller: Nottes\Apps\Api\Controller\Survey\GetSurveyListController
+#      defaults:
+#        _api_receive: false
+#      swagger_context:
+#        summary: 'Get Surveys list'
+#        description: ''
+#        parameters: [ ]
+#        responses:
+#          200:
+#            description: 'Surveys list'
+
+  itemOperations:
+
+#    get_survey_detail:
+#      method: 'GET'
+#      path: '/survey/{id}'
+#      schemes: [ 'https', 'http' ]
+#      controller: Nottes\Apps\Api\Controller\Survey\GetSurveyDetailByIdController
+#      defaults:
+#        _api_receive: false
+#      swagger_context:
+#        summary: 'Get Survey detail by id'
+#        description: ''
+#        parameters: []
+#        responses:
+#          200:
+#            description: 'Survey detail'
+#          400:
+#            description: 'Incorrect Parameters'

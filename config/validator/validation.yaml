@@ -1,6 +1,0 @@
-App\Entity\Notte:
-    properties:
-        name:
-            - NotBlank: ~
-        content:
-            - NotBlank: ~
