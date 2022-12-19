@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Nottes\Application\Folder\Creator;
+
 use App\Nottes\Domain\Folder\Folder;
 use App\Nottes\Domain\Folder\FolderId;
 use App\Nottes\Domain\Folder\FolderRepository;

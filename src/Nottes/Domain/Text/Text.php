@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Nottes\Domain\Folder;
+namespace App\Nottes\Domain\Text;
 
+use App\Nottes\Domain\Folder\Folder;
 use App\Shared\Domain\Aggregate\AggregateRoot;
 
-final class Folder extends AggregateRoot
+final class Text extends AggregateRoot
 {
     private string $id;
 
@@ -12,7 +13,11 @@ final class Folder extends AggregateRoot
 
     private ?string $description;
 
-    private ?Folder $parent;
+    private string $content;
+
+    private string $format;
+
+    private ?Folder $folder;
 
     private \DateTimeInterface $createdAt;
 
@@ -21,44 +26,60 @@ final class Folder extends AggregateRoot
     private \DateTimeInterface $deletedAt;
 
     /**
-     * @param string $id
+     * @param TextId $id
      * @param string $name
-     * @param Folder|null $parent
+     * @param string $content
+     * @param string $format
      * @param string|null $description
+     * @param Folder|null $folder
      */
-    private function __construct(string $id, string $name, ?Folder $parent, ?string $description)
+    private function __construct(
+        TextId  $id,
+        string  $name,
+        string  $content,
+        string  $format,
+        ?string $description = null,
+        ?Folder $folder = null)
     {
         $this->id = $id;
         $this->name = $name;
-        $this->parent = $parent;
         $this->description = $description;
+        $this->content = $content;
+        $this->format = $format;
+        $this->folder = $folder;
         $this->createdAt = $this->updatedAt = new \DateTime();
     }
 
     /**
-     * @param FolderId $id
+     * @param TextId $id
      * @param string $name
-     * @param Folder|null $parent
+     * @param string $content
+     * @param string $format
      * @param string|null $description
+     * @param Folder|null $folder
      * @return static
      */
     public static function create(
-        FolderId $id,
-        string $name,
-        ?Folder $parent,
-        ?string $description
-    ) : self
+        TextId  $id,
+        string  $name,
+        string  $content,
+        string  $format,
+        ?string $description = null,
+        ?Folder $folder = null
+    ): self
     {
         return new self(
-            $id->value(),
+            $id,
             $name,
-            $parent,
-            $description
+            $content,
+            $format,
+            $description,
+            $folder
         );
     }
 
     /**
-     * @return FolderId
+     * @return string
      */
     public function getId(): string
     {
@@ -79,6 +100,30 @@ final class Folder extends AggregateRoot
     public function getDescription(): ?string
     {
         return $this->description;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent(): string
+    {
+        return $this->content;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFormat(): string
+    {
+        return $this->format;
+    }
+
+    /**
+     * @return Folder|null
+     */
+    public function getFolder(): ?Folder
+    {
+        return $this->folder;
     }
 
     /**
@@ -103,13 +148,5 @@ final class Folder extends AggregateRoot
     public function getDeletedAt(): \DateTimeInterface
     {
         return $this->deletedAt;
-    }
-
-    /**
-     * @return Folder|null
-     */
-    public function getParent(): ?Folder
-    {
-        return $this->parent;
     }
 }
