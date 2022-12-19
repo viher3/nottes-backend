@@ -20,6 +20,12 @@ doctrine:
                         dir: '%kernel.project_dir%/src/Nottes/Infrastructure/Folder/Persistence/Doctrine'
                         prefix: 'App\Nottes\Domain\Folder'
                         alias: Folder
+                    Text:
+                        is_bundle: false
+                        type: xml
+                        dir: '%kernel.project_dir%/src/Nottes/Infrastructure/Text/Persistence/Doctrine'
+                        prefix: 'App\Nottes\Domain\Text'
+                        alias: Text
 
 when@test:
     doctrine:
