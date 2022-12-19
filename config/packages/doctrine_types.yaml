@@ -1,5 +1,5 @@
-doctrine:
-  dbal:
-    types:
-      # Folder
-      FolderId: App\Nottes\Infrastructure\Folder\Persistence\Doctrine\DoctrineFolderId
+#doctrine:
+#  dbal:
+#    types:
+#      # Folder
+#      FolderId: App\Nottes\Infrastructure\Folder\Persistence\Doctrine\DoctrineFolderId

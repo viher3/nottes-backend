@@ -14,17 +14,19 @@ final class FolderCreator
         $this->folderRepository = $folderRepository;
     }
 
-
     /**
      * @param FolderCreatorRequest $request
      * @return void
      */
     public function execute(FolderCreatorRequest $request) : FolderCreatorResponse
     {
-        $folder = new Folder(
+        $parentFolderId = $request->getParent() ? new FolderId($request->getParent()) : null;
+        $parentFolder = $parentFolderId ? $this->folderRepository->find($parentFolderId) : null;
+
+        $folder = Folder::create(
             FolderId::random(),
             $request->getName(),
-            $request->getParent(),
+            $parentFolder,
             $request->getDescription()
         );
 

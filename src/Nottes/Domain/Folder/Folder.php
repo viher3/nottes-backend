@@ -6,7 +6,7 @@ use App\Shared\Domain\Aggregate\AggregateRoot;
 
 class Folder extends AggregateRoot
 {
-    private FolderId $id;
+    private string $id;
 
     private string $name;
 
@@ -21,12 +21,12 @@ class Folder extends AggregateRoot
     private \DateTimeInterface $deletedAt;
 
     /**
-     * @param FolderId $id
+     * @param string $id
      * @param string $name
      * @param Folder|null $parent
      * @param string|null $description
      */
-    public function __construct(FolderId $id, string $name, ?Folder $parent, ?string $description)
+    private function __construct(string $id, string $name, ?Folder $parent, ?string $description)
     {
         $this->id = $id;
         $this->name = $name;
@@ -36,9 +36,31 @@ class Folder extends AggregateRoot
     }
 
     /**
+     * @param FolderId $id
+     * @param string $name
+     * @param Folder|null $parent
+     * @param string|null $description
+     * @return static
+     */
+    public static function create(
+        FolderId $id,
+        string $name,
+        ?Folder $parent,
+        ?string $description
+    ) : self
+    {
+        return new self(
+            $id->value(),
+            $name,
+            $parent,
+            $description
+        );
+    }
+
+    /**
      * @return FolderId
      */
-    public function getId(): FolderId
+    public function getId(): string
     {
         return $this->id;
     }

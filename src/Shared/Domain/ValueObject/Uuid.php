@@ -7,7 +7,7 @@ namespace App\Shared\Domain\ValueObject;
 use InvalidArgumentException;
 use Ramsey\Uuid\Uuid as RamseyUuid;
 
-class Uuid
+abstract class Uuid
 {
     protected $value;
 

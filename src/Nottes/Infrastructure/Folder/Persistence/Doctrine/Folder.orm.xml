@@ -5,7 +5,7 @@
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="App\Nottes\Domain\Folder\Folder" table="folders">
-        <id name="id" type="FolderId" column="id" length="36"/>
+        <id name="id" type="string" column="id" length="36"/>
         <field name="name" type="string" column="name" length="255"/>
         <field name="description" type="text" column="description" nullable="true"/>
         <field name="createdAt" column="created_at" type="datetime"/>
@@ -14,5 +14,11 @@
         <many-to-one field="parent" target-entity="App\Nottes\Domain\Folder\Folder">
             <join-column name="parent_id" referenced-column-name="id" nullable="true"/>
         </many-to-one>
+
+        <unique-constraints>
+            <unique-constraint columns="name,parent_id" name="unq_name_parent" />
+        </unique-constraints>
+
     </entity>
+
 </doctrine-mapping>

@@ -40,7 +40,6 @@ class FolderPostController extends AbstractController
 
             return new JsonResponse([], Response::HTTP_CREATED);
         } catch (\Exception $e) {
-            var_dump($e->getMessage());
             return new JsonResponse([
                 'error' => $e->getMessage()
             ], Response::HTTP_INTERNAL_SERVER_ERROR);
