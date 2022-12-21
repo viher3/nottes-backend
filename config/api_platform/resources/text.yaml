@@ -1,0 +1,38 @@
+App\Nottes\Domain\Text\Text:
+  shortName: 'Text'
+  description: 'Resource'
+  iri: 'https://schema.org/Text'
+  attributes: []
+  collectionOperations:
+
+    create_folder:
+      method: 'POST'
+      path: '/text'
+      schemes: [ 'https', 'http' ]
+      controller: Nottes\Apps\Api\Controller\Text\TextPostController
+      defaults:
+        _api_receive: false
+      openapi_context:
+        summary: 'Create Text'
+        consumes:
+          - application/json
+
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name: { type: string }
+                  content: { type: string }
+                  format: { type: integer }
+                  folder: {type: string, required: false }
+                  description: { type: string, required: false }
+
+        responses:
+          200:
+            description: 'Text'
+          400:
+            description: 'Incorrect Parameters'
+
+  itemOperations: []

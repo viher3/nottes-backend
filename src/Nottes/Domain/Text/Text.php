@@ -7,18 +7,6 @@ use App\Shared\Domain\Aggregate\AggregateRoot;
 
 final class Text extends AggregateRoot
 {
-    private string $id;
-
-    private string $name;
-
-    private ?string $description;
-
-    private string $content;
-
-    private string $format;
-
-    private ?Folder $folder;
-
     private \DateTimeInterface $createdAt;
 
     private \DateTimeInterface $updatedAt;
@@ -29,24 +17,19 @@ final class Text extends AggregateRoot
      * @param TextId $id
      * @param string $name
      * @param string $content
-     * @param string $format
+     * @param int $format
      * @param string|null $description
      * @param Folder|null $folder
      */
     private function __construct(
-        TextId  $id,
-        string  $name,
-        string  $content,
-        string  $format,
-        ?string $description = null,
-        ?Folder $folder = null)
+        private TextId  $id,
+        private string  $name,
+        private string  $content,
+        private int     $format,
+        private ?string $description = null,
+        private ?Folder $folder = null
+    )
     {
-        $this->id = $id;
-        $this->name = $name;
-        $this->description = $description;
-        $this->content = $content;
-        $this->format = $format;
-        $this->folder = $folder;
         $this->createdAt = $this->updatedAt = new \DateTime();
     }
 
@@ -54,25 +37,25 @@ final class Text extends AggregateRoot
      * @param TextId $id
      * @param string $name
      * @param string $content
-     * @param string $format
+     * @param TextFormat $format
      * @param string|null $description
      * @param Folder|null $folder
      * @return static
      */
     public static function create(
-        TextId  $id,
-        string  $name,
-        string  $content,
-        string  $format,
-        ?string $description = null,
-        ?Folder $folder = null
+        TextId     $id,
+        string     $name,
+        string     $content,
+        TextFormat $format,
+        ?Folder    $folder = null,
+        ?string    $description = null
     ): self
     {
         return new self(
             $id,
             $name,
             $content,
-            $format,
+            (int)$format->value(),
             $description,
             $folder
         );
@@ -111,9 +94,9 @@ final class Text extends AggregateRoot
     }
 
     /**
-     * @return string
+     * @return int
      */
-    public function getFormat(): string
+    public function getFormat(): int
     {
         return $this->format;
     }
