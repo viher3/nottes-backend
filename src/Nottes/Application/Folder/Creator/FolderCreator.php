@@ -16,19 +16,19 @@ final class FolderCreator
     }
 
     /**
-     * @param FolderCreatorRequest $request
-     * @return void
+     * @param FolderCreatorCommand $command
+     * @return FolderCreatorResponse
      */
-    public function execute(FolderCreatorRequest $request) : FolderCreatorResponse
+    public function execute(FolderCreatorCommand $command) : FolderCreatorResponse
     {
-        $parentFolderId = $request->getParent() ? new FolderId($request->getParent()) : null;
+        $parentFolderId = $command->getParent() ? new FolderId($command->getParent()) : null;
         $parentFolder = $parentFolderId ? $this->folderRepository->find($parentFolderId) : null;
 
         $folder = Folder::create(
             FolderId::random(),
-            $request->getName(),
+            $command->getName(),
             $parentFolder,
-            $request->getDescription()
+            $command->getDescription()
         );
 
         $this->folderRepository->save($folder);

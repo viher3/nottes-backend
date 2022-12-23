@@ -4,7 +4,7 @@ namespace App\Nottes\Application\Folder\Creator;
 
 use App\Shared\Application\ApplicationServiceRequest;
 
-class FolderCreatorRequest implements ApplicationServiceRequest
+class FolderCreatorCommand implements ApplicationServiceRequest
 {
     private string $name;
     private ?string $parent;

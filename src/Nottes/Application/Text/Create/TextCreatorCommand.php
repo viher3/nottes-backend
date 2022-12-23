@@ -2,7 +2,7 @@
 
 namespace App\Nottes\Application\Text\Create;
 
-final class TextCreatorRequest
+final class TextCreatorCommand
 {
     /**
      * @param string $name

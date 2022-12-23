@@ -2,12 +2,12 @@
 
 namespace App\Nottes\Application\Text\Create;
 
-use App\Nottes\Domain\Folder\FolderId;
-use App\Nottes\Domain\Folder\FolderRepository;
 use App\Nottes\Domain\Text\Text;
-use App\Nottes\Domain\Text\TextFormat;
 use App\Nottes\Domain\Text\TextId;
+use App\Nottes\Domain\Folder\FolderId;
+use App\Nottes\Domain\Text\TextFormat;
 use App\Nottes\Domain\Text\TextRepository;
+use App\Nottes\Domain\Folder\FolderRepository;
 
 final class TextCreator
 {
@@ -23,22 +23,22 @@ final class TextCreator
     }
 
     /**
-     * @param TextCreatorRequest $request
+     * @param TextCreatorCommand $command
      * @return TextCreatorResponse
      * @throws \Exception
      */
-    public function execute(TextCreatorRequest $request) : TextCreatorResponse
+    public function execute(TextCreatorCommand $command) : TextCreatorResponse
     {
-        $folderId = $request->getFolder() ? new FolderId($request->getFolder()) : null;
+        $folderId = $command->getFolder() ? new FolderId($command->getFolder()) : null;
         $folder = $folderId ? $this->folderRepository->find($folderId) : null;
 
         $text = Text::create(
             TextId::random(),
-            $request->getName(),
-            $request->getContent(),
-            new TextFormat($request->getFormat()),
+            $command->getName(),
+            $command->getContent(),
+            new TextFormat($command->getFormat()),
             $folder,
-            $request->getDescription()
+            $command->getDescription()
         );
 
         $this->textRepository->save($text);
