@@ -5,7 +5,7 @@ namespace App\Nottes\Domain\Text;
 use App\Nottes\Domain\Folder\Folder;
 use App\Shared\Domain\Aggregate\AggregateRoot;
 
-final class Text extends AggregateRoot
+class Text extends AggregateRoot
 {
     private \DateTimeInterface $createdAt;
 

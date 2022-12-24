@@ -4,7 +4,7 @@ namespace App\Nottes\Domain\Folder;
 
 use App\Shared\Domain\Aggregate\AggregateRoot;
 
-final class Folder extends AggregateRoot
+class Folder extends AggregateRoot
 {
     private string $id;
 

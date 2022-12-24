@@ -33,20 +33,36 @@ App\Nottes\Domain\Folder\Folder:
           400:
             description: 'Incorrect Parameters'
 
-#    get_folder_list:
-#      method: 'GET'
-#      path: '/folders'
-#      schemes: [ 'https', 'http' ]
-#      controller: Nottes\Apps\Api\Controller\Folder\FolderListController
-#      defaults:
-#        _api_receive: false
-#      swagger_context:
-#        summary: 'Get Surveys list'
-#        description: ''
-#        parameters: [ ]
-#        responses:
-#          200:
-#            description: 'Surveys list'
+    get_folder_collection_search:
+      method: 'GET'
+      path: '/folders'
+      schemes: [ 'https', 'http' ]
+      controller: Nottes\Apps\Api\Controller\Folder\FolderGetCollectionController
+      defaults:
+        _api_receive: false
+      openapi_context:
+        summary: 'Get Folder content collection'
+        description: ''
+        parameters:
+          - in: query
+            name: filters
+            required: false
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  field: { type: string }
+                  operator: { type: string }
+                  value: { type: string }
+          - in: query
+            name: order_by
+            required: false
+            schema:
+              type: string
+        responses:
+          200:
+            description: 'Folder content'
 
   itemOperations: []
 
