@@ -17,7 +17,7 @@ class FolderCreatorCommand implements ApplicationServiceRequest
      */
     public function __construct(
         string $name,
-        ?string $parent = null,
+        string $parent,
         ?string $description = null
     )
     {
@@ -35,9 +35,9 @@ class FolderCreatorCommand implements ApplicationServiceRequest
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getParent(): ?string
+    public function getParent(): string
     {
         return $this->parent;
     }
