@@ -27,7 +27,7 @@ final class FolderCreator
         $parentFolder = $this->folderRepository->find($parentFolderId);
 
         if(!$parentFolder){
-            throw new FolderNotFound("Parent folder $parentFolderId not found.");
+            throw new FolderNotFound($parentFolderId, true);
         }
 
         $folder = Folder::create(
