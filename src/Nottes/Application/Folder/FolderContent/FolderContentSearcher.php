@@ -4,6 +4,7 @@ namespace App\Nottes\Application\Folder\FolderContent;
 
 use App\Nottes\Domain\Folder\FolderId;
 use App\Nottes\Domain\Folder\FolderRepository;
+use App\Nottes\Domain\Text\TextRepository;
 use App\Shared\Domain\Criteria\Criteria;
 use App\Shared\Domain\Criteria\Filter;
 use App\Shared\Domain\Criteria\FilterField;
@@ -17,7 +18,8 @@ use App\Shared\Domain\Criteria\OrderType;
 class FolderContentSearcher
 {
     public function __construct(
-        private FolderRepository $folderRepository
+        private FolderRepository $folderRepository,
+        private TextRepository $textRepository
     )
     {
     }
@@ -51,7 +53,9 @@ class FolderContentSearcher
         $childFolders = $this->folderRepository->matching($childFoldersCriteria);
         $folderContentCollection = array_merge($folderContentCollection, $childFolders);
 
-        // TODO: Get other content type in folders
+        // Get other content type in the folder
+        $childFolderContent = $this->textRepository->matching($childFoldersCriteria);
+        $folderContentCollection = array_merge($folderContentCollection, $childFolderContent);
 
         return FolderContentSearcherResponse::create($folderContentCollection);
     }

@@ -3,6 +3,8 @@
 namespace App\Nottes\Infrastructure\Text\Persistence;
 
 use App\Nottes\Domain\Text\Text;
+use App\Shared\Domain\Criteria\Criteria;
+use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineCriteriaConverter;
 use Doctrine\ORM\EntityRepository;
 use App\Nottes\Domain\Text\TextId;
 use App\Nottes\Domain\Text\TextRepository;
@@ -29,7 +31,7 @@ class DoctrineTextRepository extends DoctrineRepository implements TextRepositor
     /**
      * @return EntityRepository
      */
-    private function getRepository() : EntityRepository
+    protected function getRepository() : EntityRepository
     {
         return $this->repository(Text::class);
     }

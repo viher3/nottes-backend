@@ -1,0 +1,3 @@
+services:
+
+  App\Nottes\Domain\Text\TextRepository: '@App\Nottes\Infrastructure\Text\Persistence\DoctrineTextRepository'

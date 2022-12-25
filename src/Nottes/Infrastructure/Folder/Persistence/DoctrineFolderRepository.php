@@ -42,18 +42,8 @@ class DoctrineFolderRepository extends DoctrineRepository implements FolderRepos
     /**
      * @return EntityRepository
      */
-    private function getRepository() : EntityRepository
+    protected function getRepository() : EntityRepository
     {
         return $this->repository(Folder::class);
-    }
-
-    /**
-     * @param Criteria $criteria
-     * @return array
-     */
-    public function matching(Criteria $criteria): array
-    {
-        $doctrineCriteria = DoctrineCriteriaConverter::convert($criteria);
-        return $this->getRepository()->matching($doctrineCriteria)->toArray();
     }
 }
