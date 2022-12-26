@@ -23,7 +23,7 @@ class FolderGetController extends AbstractController
      */
     public function __invoke(Request $request): JsonResponse
     {
-        $folderId = $request->query->get('folderId');
+        $folderId = $request->attributes->get('id');
 
         try {
             $query = new FolderContentSearcherQuery($folderId);
