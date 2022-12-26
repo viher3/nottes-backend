@@ -2,6 +2,7 @@
 
 namespace App\Nottes\Application\Text\Create;
 
+use App\Nottes\Domain\Folder\FolderNotFound;
 use App\Nottes\Domain\Text\Text;
 use App\Nottes\Domain\Text\TextId;
 use App\Nottes\Domain\Folder\FolderId;
@@ -32,12 +33,16 @@ final class TextCreator
         $folderId = $command->getFolder() ? new FolderId($command->getFolder()) : null;
         $folder = $folderId ? $this->folderRepository->find($folderId) : null;
 
+        if(!$folder){
+            throw new FolderNotFound($folderId, true);
+        }
+
         $text = Text::create(
             TextId::random(),
             $command->getName(),
             $command->getContent(),
             new TextFormat($command->getFormat()),
-            $folder,
+            $folderId,
             $command->getDescription()
         );
 

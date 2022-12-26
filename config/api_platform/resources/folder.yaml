@@ -64,21 +64,21 @@ App\Nottes\Domain\Folder\Folder:
           200:
             description: 'Folder content'
 
-  itemOperations: []
+  itemOperations:
 
-#    get_folder_detail:
-#      method: 'GET'
-#      path: '/folder/{id}'
-#      schemes: [ 'https', 'http' ]
-#      controller: Nottes\Apps\Api\Controller\Folder\FolderGetController
-#      defaults:
-#        _api_receive: false
-#      swagger_context:
-#        summary: 'Get folder detail by id'
-#        description: ''
-#        parameters: []
-#        responses:
-#          200:
-#            description: 'Folder detail'
-#          400:
-#            description: 'Incorrect Parameters'
+    get_folder_detail:
+      method: 'GET'
+      path: '/folder/{id}'
+      schemes: [ 'https', 'http' ]
+      controller: Nottes\Apps\Api\Controller\Folder\FolderGetController
+      defaults:
+        _api_receive: false
+      swagger_context:
+        summary: 'Get folder content by id'
+        description: ''
+        parameters: []
+        responses:
+          200:
+            description: 'Folder detail'
+          400:
+            description: 'Incorrect Parameters'

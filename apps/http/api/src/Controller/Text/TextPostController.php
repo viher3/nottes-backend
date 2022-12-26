@@ -2,12 +2,12 @@
 
 namespace Nottes\Apps\Api\Controller\Text;
 
+use App\Nottes\Application\Text\Create\TextCreatorCommand;
 use Assert\Assertion;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Nottes\Application\Text\Create\TextCreator;
-use App\Nottes\Application\Text\Create\TextCreatorRequest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TextPostController extends AbstractController
@@ -31,7 +31,7 @@ class TextPostController extends AbstractController
             $this->paramAssertions($postData);
 
             $this->folderCreator->execute(
-                new TextCreatorRequest(
+                new TextCreatorCommand(
                     $postData['name'],
                     $postData['content'],
                     $postData['format'],

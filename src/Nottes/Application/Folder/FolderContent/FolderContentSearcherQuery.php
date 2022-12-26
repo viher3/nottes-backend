@@ -5,15 +5,15 @@ namespace App\Nottes\Application\Folder\FolderContent;
 class FolderContentSearcherQuery
 {
     public function __construct(
-        private string $folderId
+        private ?string $folderId = null
     )
     {
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFolderId(): string
+    public function getFolderId(): ?string
     {
         return $this->folderId;
     }

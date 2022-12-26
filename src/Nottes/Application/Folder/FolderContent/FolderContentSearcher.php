@@ -19,7 +19,7 @@ class FolderContentSearcher
 {
     public function __construct(
         private FolderRepository $folderRepository,
-        private TextRepository $textRepository
+        private TextRepository   $textRepository
     )
     {
     }
@@ -28,22 +28,27 @@ class FolderContentSearcher
      * @param FolderContentSearcherQuery $query
      * @return FolderContentSearcherResponse
      */
-    public function execute(FolderContentSearcherQuery $query) : FolderContentSearcherResponse
+    public function execute(FolderContentSearcherQuery $query): FolderContentSearcherResponse
     {
         $folderContentCollection = [];
-        $folderId = new FolderId($query->getFolderId());
+        $folderId = $query->getFolderId() ? new FolderId($query->getFolderId()) : null;
+
+        if(!$folderId){
+            $folderRoot = $this->folderRepository->findRoot();
+            $folderId = new FolderId($folderRoot->getId());
+        }
 
         // Get child folders
         $childFoldersCriteria = new Criteria(
             (new Filters([]))->add(
                 new Filter(
-                    new FilterField('parent_id'),
+                    new FilterField('parent'),
                     new FilterOperator(FilterOperator::EQUAL),
                     new FilterValue($folderId->value())
                 )
             ),
             new Order(
-                new OrderBy('asc'),
+                new OrderBy('name'),
                 new OrderType(OrderType::ASC)
             ),
             null,
@@ -54,7 +59,23 @@ class FolderContentSearcher
         $folderContentCollection = array_merge($folderContentCollection, $childFolders);
 
         // Get other content type in the folder
-        $childFolderContent = $this->textRepository->matching($childFoldersCriteria);
+        $parentFolderCriteria = new Criteria(
+            (new Filters([]))->add(
+                new Filter(
+                    new FilterField('folder'),
+                    new FilterOperator(FilterOperator::EQUAL),
+                    new FilterValue($folderId->value())
+                )
+            ),
+            new Order(
+                new OrderBy('name'),
+                new OrderType(OrderType::ASC)
+            ),
+            null,
+            null
+        );
+
+        $childFolderContent = $this->textRepository->matching($parentFolderCriteria);
         $folderContentCollection = array_merge($folderContentCollection, $childFolderContent);
 
         return FolderContentSearcherResponse::create($folderContentCollection);

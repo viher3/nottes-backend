@@ -2,7 +2,6 @@
 
 namespace App\Nottes\Domain\Text;
 
-use App\Nottes\Domain\Folder\Folder;
 use App\Shared\Domain\Aggregate\AggregateRoot;
 
 class Text extends AggregateRoot
@@ -14,20 +13,20 @@ class Text extends AggregateRoot
     private \DateTimeInterface $deletedAt;
 
     /**
-     * @param TextId $id
+     * @param string $id
      * @param string $name
      * @param string $content
      * @param int $format
+     * @param string $folder
      * @param string|null $description
-     * @param Folder|null $folder
      */
     private function __construct(
-        private TextId  $id,
+        private string  $id,
         private string  $name,
         private string  $content,
         private int     $format,
-        private ?string $description = null,
-        private ?Folder $folder = null
+        private string  $folder,
+        private ?string $description = null
     )
     {
         $this->createdAt = $this->updatedAt = new \DateTime();
@@ -38,8 +37,8 @@ class Text extends AggregateRoot
      * @param string $name
      * @param string $content
      * @param TextFormat $format
+     * @param string $folder
      * @param string|null $description
-     * @param Folder|null $folder
      * @return static
      */
     public static function create(
@@ -47,7 +46,7 @@ class Text extends AggregateRoot
         string     $name,
         string     $content,
         TextFormat $format,
-        ?Folder    $folder = null,
+        string     $folder,
         ?string    $description = null
     ): self
     {
@@ -56,8 +55,8 @@ class Text extends AggregateRoot
             $name,
             $content,
             (int)$format->value(),
-            $description,
-            $folder
+            $folder,
+            $description
         );
     }
 
@@ -102,9 +101,9 @@ class Text extends AggregateRoot
     }
 
     /**
-     * @return Folder|null
+     * @return string
      */
-    public function getFolder(): ?Folder
+    public function getFolder(): string
     {
         return $this->folder;
     }

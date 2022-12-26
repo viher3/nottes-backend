@@ -40,7 +40,6 @@ final class SearchFolderByCriteriaSearcher
                     new FilterValue($parentFolder->getId())
                 )
             );
-
         }
 
         $criteria = new Criteria(

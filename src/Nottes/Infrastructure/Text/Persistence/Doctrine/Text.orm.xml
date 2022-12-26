@@ -13,9 +13,7 @@
         <field name="createdAt" column="created_at" type="datetime"/>
         <field name="updatedAt" column="updated_at" type="datetime"/>
         <field name="deletedAt" column="deleted_at" type="datetime" nullable="true"/>
-        <many-to-one field="folder" target-entity="App\Nottes\Domain\Folder\Folder">
-            <join-column name="folder_id" referenced-column-name="id" nullable="true"/>
-        </many-to-one>
+        <field name="folder" type="string" column="folder_id" length="255"/>
 
         <unique-constraints>
             <unique-constraint columns="name,folder_id" name="unq_name_parent"/>
