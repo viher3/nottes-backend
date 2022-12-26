@@ -33,7 +33,7 @@ final class FolderCreator
         $folder = Folder::create(
             FolderId::random(),
             $command->getName(),
-            $parentFolder,
+            $parentFolderId,
             $command->getDescription()
         );
 

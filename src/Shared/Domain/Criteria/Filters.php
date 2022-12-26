@@ -24,6 +24,21 @@ final class Filters extends Collection
         return new self(array_merge($this->items(), [$filter]));
     }
 
+    public function hasKey(string $key) : bool
+    {
+        if(empty($this->items())) {
+            return false;
+        }
+
+        $this->each(function($item, $itemKey) use ($key){
+            if($itemKey === $key) {
+                return true;
+            }
+        });
+
+        return false;
+    }
+
     public function filters(): array
     {
         return $this->items();

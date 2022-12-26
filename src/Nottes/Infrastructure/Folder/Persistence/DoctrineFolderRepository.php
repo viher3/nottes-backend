@@ -5,10 +5,8 @@ namespace App\Nottes\Infrastructure\Folder\Persistence;
 use Doctrine\ORM\EntityRepository;
 use App\Nottes\Domain\Folder\Folder;
 use App\Nottes\Domain\Folder\FolderId;
-use App\Shared\Domain\Criteria\Criteria;
 use App\Nottes\Domain\Folder\FolderRepository;
 use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineRepository;
-use App\Shared\Infrastructure\Persistence\Doctrine\DoctrineCriteriaConverter;
 
 class DoctrineFolderRepository extends DoctrineRepository implements FolderRepository
 {
@@ -28,6 +26,14 @@ class DoctrineFolderRepository extends DoctrineRepository implements FolderRepos
     public function find(FolderId $id): ?Folder
     {
         return $this->getRepository()->find($id);
+    }
+
+    /**
+     * @return Folder
+     */
+    public function findRoot() : Folder
+    {
+        return $this->getRepository()->findOneBy(['name' => '/']);
     }
 
     /**

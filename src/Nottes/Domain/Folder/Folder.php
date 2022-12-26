@@ -12,7 +12,7 @@ class Folder extends AggregateRoot
 
     private ?string $description;
 
-    private ?Folder $parent;
+    private string $parent;
 
     private \DateTimeInterface $createdAt;
 
@@ -23,10 +23,10 @@ class Folder extends AggregateRoot
     /**
      * @param string $id
      * @param string $name
-     * @param Folder|null $parent
+     * @param string $parent
      * @param string|null $description
      */
-    private function __construct(string $id, string $name, ?Folder $parent, ?string $description)
+    private function __construct(string $id, string $name, string $parent, ?string $description)
     {
         $this->id = $id;
         $this->name = $name;
@@ -45,7 +45,7 @@ class Folder extends AggregateRoot
     public static function create(
         FolderId $id,
         string $name,
-        ?Folder $parent,
+        string $parent,
         ?string $description
     ) : self
     {
@@ -106,10 +106,15 @@ class Folder extends AggregateRoot
     }
 
     /**
-     * @return Folder|null
+     * @return string
      */
-    public function getParent(): ?Folder
+    public function getParent(): string
     {
         return $this->parent;
+    }
+
+    public function __toString() : string
+    {
+        return $this->id;
     }
 }
