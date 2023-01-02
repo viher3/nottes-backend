@@ -2,6 +2,7 @@
 
 namespace App\Nottes\Application\Folder\FolderContent;
 
+use App\Nottes\Domain\Folder\Folder;
 use App\Nottes\Domain\Folder\FolderId;
 use App\Nottes\Domain\Folder\FolderRepository;
 use App\Nottes\Domain\Text\TextRepository;
@@ -38,6 +39,12 @@ class FolderContentSearcher
             $folderId = new FolderId($folderRoot->getId());
         }
 
+        /**
+         * Get current folder
+         * @var Folder $currentFolder
+         */
+        $currentFolder = $folderRoot ?? $this->folderRepository->find($folderId);
+
         // Get child folders
         $childFoldersCriteria = new Criteria(
             (new Filters([]))->add(
@@ -56,6 +63,7 @@ class FolderContentSearcher
         );
 
         $childFolders = $this->folderRepository->matching($childFoldersCriteria);
+
         $folderContentCollection = array_merge($folderContentCollection, $childFolders);
 
         // Get other content type in the folder
@@ -78,6 +86,10 @@ class FolderContentSearcher
         $childFolderContent = $this->textRepository->matching($parentFolderCriteria);
         $folderContentCollection = array_merge($folderContentCollection, $childFolderContent);
 
-        return FolderContentSearcherResponse::create($folderContentCollection);
+        return FolderContentSearcherResponse::create(
+            $this->folderRepository,
+            $currentFolder,
+            $folderContentCollection
+        );
     }
 }

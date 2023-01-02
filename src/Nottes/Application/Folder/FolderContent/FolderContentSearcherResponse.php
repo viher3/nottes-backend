@@ -3,6 +3,8 @@
 namespace App\Nottes\Application\Folder\FolderContent;
 
 use App\Nottes\Domain\Folder\Folder;
+use App\Nottes\Domain\Folder\FolderRepository;
+use App\Nottes\Domain\Folder\Services\FolderBreadcrumbGenerator;
 use App\Nottes\Domain\Text\Text;
 use App\Shared\Domain\Aggregate\AggregateRoot;
 use function Lambdish\Phunctional\map;
@@ -21,9 +23,12 @@ class FolderContentSearcherResponse
     /**
      * @return static
      */
-    public static function create(array $folderContent) : self
+    public static function create(
+        FolderRepository $folderRepository,
+        Folder           $currentFolder,
+        array            $folderContent): self
     {
-        $folderContentResponse = map(function($contentItem){
+        $folderContentResponse = map(function ($contentItem) {
             return [
                 'id' => $contentItem->getId(),
                 'name' => $contentItem->getName(),
@@ -32,16 +37,23 @@ class FolderContentSearcherResponse
             ];
         }, $folderContent);
 
-        return new self($folderContentResponse);
+        $folderBreadcrumbGenerator = new FolderBreadcrumbGenerator($folderRepository);
+
+        $response = [
+            'content' => $folderContentResponse,
+            'breadcrumb' => $folderBreadcrumbGenerator->execute($currentFolder)
+        ];
+
+        return new self($response);
     }
 
-    public static function getTypeByClass(AggregateRoot $aggregateRoot) : string
+    public static function getTypeByClass(AggregateRoot $aggregateRoot): string
     {
-        if($aggregateRoot instanceof Folder){
+        if ($aggregateRoot instanceof Folder) {
             return 'folder';
         }
 
-        if($aggregateRoot instanceof Text){
+        if ($aggregateRoot instanceof Text) {
             return 'text';
         }
 
