@@ -33,14 +33,20 @@ final class FolderBreadcrumbGenerator
 
         while(true)
         {
-            $parent = $this->folderRepository->find(new FolderId($parent));
+            $parentId = $parent instanceof Folder ? $parent->getId() : $parent;
+
+            if(!$parentId) {
+                break;
+            }
+
+            $parent = $this->folderRepository->find(new FolderId($parentId));
 
             $breadcrumb[] = [
                 'id' => $parent->getId(),
                 'name' => $parent->getName()
             ];
 
-            $parent = $this->getParent($folder);
+            $parent = $this->getParent($parent);
 
             $lastKey = count($breadcrumb) - 1;
             $lastBreadcrumbItem = $breadcrumb[$lastKey];
