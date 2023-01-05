@@ -59,6 +59,23 @@ class Folder extends AggregateRoot
     }
 
     /**
+     * @param array $body
+     * @return void
+     */
+    public function update(array $body) : void
+    {
+        $allowedFields = ['name', 'parent', 'description'];
+
+        foreach($body as $field => $value){
+            if(!in_array($field, $allowedFields)){
+                continue;
+            }
+
+            $this->$field = $value;
+        }
+    }
+
+    /**
      * @return FolderId
      */
     public function getId(): string

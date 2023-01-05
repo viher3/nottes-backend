@@ -83,6 +83,23 @@ App\Nottes\Domain\Folder\Folder:
           400:
             description: 'Incorrect Parameters'
 
+    update_folder:
+      method: 'PATCH'
+      path: '/folder/{id}'
+      schemes: [ 'https', 'http' ]
+      controller: Nottes\Apps\Api\Controller\Folder\FolderPatchController
+      defaults:
+        _api_receive: false
+      swagger_context:
+        summary: 'Update folder'
+        description: ''
+        parameters: []
+        responses:
+          200:
+            description: 'Folder updated'
+          400:
+            description: 'Incorrect Parameters'
+
     delete_folder:
       method: 'DELETE'
       path: '/folder/{id}'
