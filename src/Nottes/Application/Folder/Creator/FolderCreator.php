@@ -23,7 +23,14 @@ final class FolderCreator
      */
     public function execute(FolderCreatorCommand $command) : FolderCreatorResponse
     {
-        $parentFolderId = new FolderId($command->getParent());
+        $parentFolderPrimitiveId = $command->getParent();
+
+        if(!$command->getParent()){
+            $folderRoot = $this->folderRepository->findRoot();
+            $parentFolderPrimitiveId = $folderRoot->getId();
+        }
+
+        $parentFolderId = new FolderId($parentFolderPrimitiveId);
         $parentFolder = $this->folderRepository->find($parentFolderId);
 
         if(!$parentFolder){

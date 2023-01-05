@@ -29,7 +29,10 @@ class FolderPostController extends AbstractController
 
         try {
             Assertion::notEmpty($postData['name'], 'Error, folder name is required.');
-            Assertion::notEmpty($postData['parent'], 'Error, parent folder is required.');
+
+            if(!isset($postData['parent'])){
+                throw new \InvalidArgumentException('Error, parent folder is required.');
+            }
 
             $this->folderCreator->execute(
                 new FolderCreatorCommand(

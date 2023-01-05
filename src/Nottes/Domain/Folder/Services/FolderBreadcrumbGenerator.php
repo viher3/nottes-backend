@@ -5,7 +5,6 @@ namespace App\Nottes\Domain\Folder\Services;
 use App\Nottes\Domain\Folder\Folder;
 use App\Nottes\Domain\Folder\FolderId;
 use App\Nottes\Domain\Folder\FolderRepository;
-
 final class FolderBreadcrumbGenerator
 {
     public function __construct(
