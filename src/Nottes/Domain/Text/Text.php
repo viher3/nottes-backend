@@ -10,7 +10,7 @@ class Text extends AggregateRoot
 
     private \DateTimeInterface $updatedAt;
 
-    private \DateTimeInterface $deletedAt;
+    private ?\DateTimeInterface $deletedAt;
 
     /**
      * @param string $id
@@ -30,6 +30,7 @@ class Text extends AggregateRoot
     )
     {
         $this->createdAt = $this->updatedAt = new \DateTime();
+        $this->deletedAt = null;
     }
 
     /**
@@ -125,10 +126,15 @@ class Text extends AggregateRoot
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
-    public function getDeletedAt(): \DateTimeInterface
+    public function getDeletedAt(): ?\DateTimeInterface
     {
         return $this->deletedAt;
+    }
+
+    public function isDeleted() : bool
+    {
+        return $this->deletedAt !== null;
     }
 }

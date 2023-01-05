@@ -18,7 +18,7 @@ class Folder extends AggregateRoot
 
     private \DateTimeInterface $updatedAt;
 
-    private \DateTimeInterface $deletedAt;
+    private ?\DateTimeInterface $deletedAt;
 
     /**
      * @param string $id
@@ -33,6 +33,7 @@ class Folder extends AggregateRoot
         $this->parent = $parent;
         $this->description = $description;
         $this->createdAt = $this->updatedAt = new \DateTime();
+        $this->deletedAt = null;
     }
 
     /**
@@ -98,11 +99,16 @@ class Folder extends AggregateRoot
     }
 
     /**
-     * @return \DateTimeInterface
+     * @return \DateTimeInterface|null
      */
-    public function getDeletedAt(): \DateTimeInterface
+    public function getDeletedAt(): ?\DateTimeInterface
     {
         return $this->deletedAt;
+    }
+
+    public function isDeleted() : bool
+    {
+        return $this->deletedAt !== null;
     }
 
     /**

@@ -34,7 +34,7 @@ class FolderContentSearcher
         $folderContentCollection = [];
         $folderId = $query->getFolderId() ? new FolderId($query->getFolderId()) : null;
 
-        if(!$folderId){
+        if (!$folderId) {
             $folderRoot = $this->folderRepository->findRoot();
             $folderId = new FolderId($folderRoot->getId());
         }
@@ -86,10 +86,20 @@ class FolderContentSearcher
         $childFolderContent = $this->textRepository->matching($parentFolderCriteria);
         $folderContentCollection = array_merge($folderContentCollection, $childFolderContent);
 
+        // Remove 'deleted' items
+        $finalFolderContentCollection = [];
+        foreach ($folderContentCollection as $folderContent) {
+            if($folderContent->isDeleted()){
+                continue;
+            }
+
+            $finalFolderContentCollection[] = $folderContent;
+        }
+
         return FolderContentSearcherResponse::create(
             $this->folderRepository,
             $currentFolder,
-            $folderContentCollection
+            $finalFolderContentCollection
         );
     }
 }
