@@ -27,4 +27,10 @@ interface FolderRepository
      * @return Folder
      */
     public function findRoot() : Folder;
+
+    /**
+     * @param Folder $folder
+     * @return void
+     */
+    public function delete(Folder $folder) : void;
 }

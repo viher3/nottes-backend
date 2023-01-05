@@ -52,4 +52,13 @@ class DoctrineFolderRepository extends DoctrineRepository implements FolderRepos
     {
         return $this->repository(Folder::class);
     }
+
+    /**
+     * @param Folder $folder
+     * @return void
+     */
+    public function delete(Folder $folder): void
+    {
+        $this->remove($folder);
+    }
 }

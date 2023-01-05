@@ -113,6 +113,12 @@ class Folder extends AggregateRoot
         return $this->parent;
     }
 
+    public function delete() : void
+    {
+        // TODO: mark folder child content as deleted
+        $this->deletedAt = $this->updatedAt = new \DateTime();
+    }
+
     public function __toString() : string
     {
         return $this->id;

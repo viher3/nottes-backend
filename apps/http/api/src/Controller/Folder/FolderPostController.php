@@ -2,12 +2,12 @@
 
 namespace Nottes\Apps\Api\Controller\Folder;
 
-use App\Nottes\Application\Folder\Creator\FolderCreatorCommand;
 use Assert\Assertion;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Nottes\Application\Folder\Creator\FolderCreator;
+use App\Nottes\Application\Folder\Creator\FolderCreatorCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class FolderPostController extends AbstractController
@@ -22,6 +22,7 @@ class FolderPostController extends AbstractController
     /**
      * @param Request $request
      * @return JsonResponse
+     * @throws \Assert\AssertionFailedException
      */
     public function __invoke(Request $request): JsonResponse
     {
@@ -30,11 +31,11 @@ class FolderPostController extends AbstractController
         try {
             Assertion::notEmpty($postData['name'], 'Error, folder name is required.');
 
-            if(!isset($postData['parent'])){
+            if (!isset($postData['parent'])) {
                 throw new \InvalidArgumentException('Error, parent folder is required.');
             }
 
-            $this->folderCreator->execute(
+            $folderCreatorResponse = $this->folderCreator->execute(
                 new FolderCreatorCommand(
                     $postData['name'],
                     $postData['parent'],
@@ -42,7 +43,7 @@ class FolderPostController extends AbstractController
                 )
             );
 
-            return new JsonResponse([], Response::HTTP_CREATED);
+            return new JsonResponse($folderCreatorResponse->getResponse(), Response::HTTP_CREATED);
         } catch (\Exception $e) {
             return new JsonResponse([
                 'error' => $e->getMessage()

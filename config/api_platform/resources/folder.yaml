@@ -82,3 +82,20 @@ App\Nottes\Domain\Folder\Folder:
             description: 'Folder detail'
           400:
             description: 'Incorrect Parameters'
+
+    delete_folder:
+      method: 'DELETE'
+      path: '/folder/{id}'
+      schemes: [ 'https', 'http' ]
+      controller: Nottes\Apps\Api\Controller\Folder\FolderDeleteController
+      defaults:
+        _api_receive: false
+      swagger_context:
+        summary: 'Mark folder as deleted'
+        description: ''
+        parameters: []
+        responses:
+          200:
+            description: 'Folder deleted'
+          400:
+            description: 'Incorrect Parameters'
