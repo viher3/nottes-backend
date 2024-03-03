@@ -12,7 +12,7 @@ class Folder extends AggregateRoot
 
     private ?string $description;
 
-    private string $parent;
+    private ?string $parent = null;
 
     private \DateTimeInterface $createdAt;
 
@@ -26,7 +26,7 @@ class Folder extends AggregateRoot
      * @param string $parent
      * @param string|null $description
      */
-    private function __construct(string $id, string $name, string $parent, ?string $description)
+    private function __construct(string $id, string $name, ?string $parent = null, ?string $description=null)
     {
         $this->id = $id;
         $this->name = $name;
@@ -45,10 +45,10 @@ class Folder extends AggregateRoot
      */
     public static function create(
         FolderId $id,
-        string $name,
-        string $parent,
-        ?string $description
-    ) : self
+        string   $name,
+        string   $parent,
+        ?string  $description
+    ): self
     {
         return new self(
             $id->value(),
@@ -62,12 +62,12 @@ class Folder extends AggregateRoot
      * @param array $body
      * @return void
      */
-    public function update(array $body) : void
+    public function update(array $body): void
     {
         $allowedFields = ['name', 'parent', 'description'];
 
-        foreach($body as $field => $value){
-            if(!in_array($field, $allowedFields)){
+        foreach ($body as $field => $value) {
+            if (!in_array($field, $allowedFields)) {
                 continue;
             }
 
@@ -123,7 +123,7 @@ class Folder extends AggregateRoot
         return $this->deletedAt;
     }
 
-    public function isDeleted() : bool
+    public function isDeleted(): bool
     {
         return $this->deletedAt !== null;
     }
@@ -131,18 +131,18 @@ class Folder extends AggregateRoot
     /**
      * @return string
      */
-    public function getParent(): string
+    public function getParent(): ?string
     {
         return $this->parent;
     }
 
-    public function delete() : void
+    public function delete(): void
     {
         // TODO: mark folder child content as deleted
         $this->deletedAt = $this->updatedAt = new \DateTime();
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return $this->id;
     }
